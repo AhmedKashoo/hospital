@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hospital/Splash_Screen.dart';
+import 'package:hospital/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Splash_Screen()
+      home:Login()
     );
   }
 }

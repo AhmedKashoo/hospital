@@ -17,7 +17,6 @@ class _Splash_ScreenState extends State<Splash_Screen> {
       alignment: AlignmentDirectional.center,
       children: [
         EasySplashScreen(
-
           //updatek
           logo: Image.asset(
             'image/logo2.png',fit: BoxFit.fill,),
