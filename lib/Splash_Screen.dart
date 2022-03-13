@@ -14,7 +14,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
   Widget build(BuildContext context) {
     return EasySplashScreen(
 
-    //update2
+    //updatek
     logo: Image.asset(
     'image/logo2.jpeg',fit: BoxFit.fill,),
     navigator:null,
