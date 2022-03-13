@@ -26,13 +26,13 @@ class _Splash_ScreenState extends State<Splash_Screen> {
         ),
         Padding(//1234
           padding: const EdgeInsets.only(top: 200),
-          child: Text('life device', textAlign: TextAlign.center,
+          child: Text('Life Device', textAlign: TextAlign.center,
             style: TextStyle(
               decoration: TextDecoration.none,
               fontWeight: FontWeight.bold,
               fontSize: 40,
               color: Colors.blue.shade800,
-              fontStyle: FontStyle.italic
+
             ),
 
           ),

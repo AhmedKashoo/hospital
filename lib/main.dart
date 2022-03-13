@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hospital/Splash_Screen.dart';
 
 void main() {
   runApp(MyApp());
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    // navigation bar color
+    statusBarColor: Colors.blue.shade800, // status bar color
+  ));
 }
 
 class MyApp extends StatelessWidget {
