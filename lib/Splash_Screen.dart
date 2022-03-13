@@ -13,10 +13,10 @@ class _Splash_ScreenState extends State<Splash_Screen> {
   @override
   Widget build(BuildContext context) {
     return EasySplashScreen(
-      backgroundColor: Colors.white24,
-    //update
+
+    //update2
     logo: Image.asset(
-    'image/logo.jpeg',fit: BoxFit.fill,),
+    'image/logo2.jpeg',fit: BoxFit.fill,),
     navigator:null,
     durationInSeconds: 7,
     logoSize:250,
