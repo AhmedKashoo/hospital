@@ -24,7 +24,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
           durationInSeconds: 7,
           logoSize:250,
         ),
-        Padding(
+        Padding(//1234
           padding: const EdgeInsets.only(top: 200),
           child: Text('life device', textAlign: TextAlign.center,
             style: TextStyle(
