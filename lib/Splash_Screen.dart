@@ -12,15 +12,31 @@ class Splash_Screen extends StatefulWidget {
 class _Splash_ScreenState extends State<Splash_Screen> {
   @override
   Widget build(BuildContext context) {
-    return EasySplashScreen(
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        EasySplashScreen(
 
-    //updatek
-    logo: Image.asset(
-    'image/logo2.png',fit: BoxFit.fill,),
-    navigator:null,
-    durationInSeconds: 7,
-    logoSize:250,
+          //updatek
+          logo: Image.asset(
+            'image/logo2.png',fit: BoxFit.fill,),
+          navigator:null,
+          durationInSeconds: 7,
+          logoSize:250,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 200),
+          child: Text('life device', textAlign: TextAlign.center,
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              fontWeight: FontWeight.bold,
+              fontSize: 40,
+              color: Colors.blue,
+            ),
 
+          ),
+        ),
+      ],
 
     );
   }
