@@ -12,13 +12,13 @@ class Splash_Screen extends StatefulWidget {
 class _Splash_ScreenState extends State<Splash_Screen> {
   @override
   Widget build(BuildContext context) {
-    return EasySplashScreen(
-      backgroundColor: Colors.white24,
-    logo: Image.asset(
-    'image/logo.jpeg',fit: BoxFit.fill,),
-    navigator:null,
-    durationInSeconds: 7,
-    logoSize:250,
+    return  EasySplashScreen(
+      logo: Image.asset(
+        'image/logo.jpeg',fit: BoxFit.fill,
+      ),
+      navigator:null,
+      durationInSeconds: 7,
+      logoSize:250,
 
 
     );
