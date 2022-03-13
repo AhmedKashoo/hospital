@@ -27,12 +27,12 @@ class _LoginState extends State<Login> {
             height: double.infinity,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.only(top: 25,left: 30),
+              padding: const EdgeInsets.only(top: 18,left: 30),
               child: Text('Sign in',style: TextStyle(
                 color: Colors.white,
                 fontStyle: FontStyle.italic,
-                fontSize: 30,
-                fontWeight: FontWeight.w900
+                fontSize: 45,
+                fontWeight: FontWeight.bold
               ),
               ),
             ),
@@ -41,7 +41,7 @@ class _LoginState extends State<Login> {
             padding: const EdgeInsets.only(top: 80.0),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius:BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                borderRadius:BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
                 color: Colors.white,
               ),
               height: double.infinity,
@@ -49,65 +49,70 @@ class _LoginState extends State<Login> {
               child: Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Welcome back',style: TextStyle(
-                          color: Colors.blue.shade800,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 25,
-                          fontWeight:FontWeight.w900
-                      ),
-                      ),
-                      Text('Hello there, sign in to continue!',style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold
-                      ),
-                      ),
-                      SizedBox(height:40 ,),
-                      Container(
-                        height: 50,
-                        child: form(
-                          input_type: TextInputType.name,
-                          text: 'User name',
-                          controlled_text: user,
-                          prefix_icon: Icons.person
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Welcome back',style: TextStyle(
+                            color: Colors.blue.shade800,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 30,
+                            fontWeight:FontWeight.w900
+                        ),
                         ),
 
-                      ),
-                      SizedBox(height:20 ,),
-                      Container(
-                        height: 50,
-                        child: form(
-                            input_type: TextInputType.name,
-                            text: 'Password',
-                            controlled_text: pass,
-                            prefix_icon: Icons.lock,
-                             visible_function: (){
-                              setState(() {
-                                isvisible = !isvisible;
-                              });
-                             },
-                            suffix_icon: isvisible? Icons.visibility : Icons.visibility_off,
-                            obscureText: isvisible,
+                        Text('Hello there, sign in to continue!',style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold
                         ),
-                      ),
-                      SizedBox(height:10 ,),
-                      Text('Forgot Password? Contact us',style: TextStyle(
-                          color: Colors.blue.shade800,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic
-                      ),
-                      ),
-                      SizedBox(height:50 ,),
-                      button(
-                        isupper: true,
-                          text: 'Sign in',
-                          function: (){}
-                      )
-                    ],
+                        ),
+                        SizedBox(height:40 ,),
+                        Container(
+                          height: 50,
+                          child: form(
+                            input_type: TextInputType.name,
+                            text: 'User name',
+                            controlled_text: user,
+                            prefix_icon: Icons.person
+                          ),
+
+                        ),
+                        SizedBox(height:20 ,),
+                        Container(
+                          height: 50,
+                          child: form(
+                              input_type: TextInputType.name,
+                              text: 'Password',
+                              controlled_text: pass,
+                              prefix_icon: Icons.lock,
+                               visible_function: (){
+                                setState(() {
+                                  isvisible = !isvisible;
+                                });
+                               },
+                              suffix_icon: isvisible? Icons.visibility : Icons.visibility_off,
+                              obscureText: isvisible,
+                          ),
+                        ),
+                        SizedBox(height:15 ,),
+                        Center(
+                          child: Text('Forgot Password? Contact us',style: TextStyle(
+                              color: Colors.blue.shade800,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic
+                          ),
+                          ),
+                        ),
+                        SizedBox(height:50 ,),
+                        button(
+                          isupper: true,
+                            text: 'Sign in',
+                            function: (){}
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

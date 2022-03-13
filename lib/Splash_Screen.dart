@@ -3,6 +3,8 @@ import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'OnBordingScreen.dart';
+
 class Splash_Screen extends StatefulWidget {
   const Splash_Screen({Key? key}) : super(key: key);
 
@@ -20,9 +22,10 @@ class _Splash_ScreenState extends State<Splash_Screen> {
           //updatek
           logo: Image.asset(
             'image/logo2.png',fit: BoxFit.fill,),
-          navigator:null,
+          navigator:OnBoarding(),
           durationInSeconds: 7,
           logoSize:250,
+          showLoader: false,
         ),
         Padding(//1234
           padding: const EdgeInsets.only(top: 200),
