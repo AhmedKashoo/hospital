@@ -16,7 +16,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
 
     //updatek
     logo: Image.asset(
-    'image/logo2.jpeg',fit: BoxFit.fill,),
+    'image/logo2.png',fit: BoxFit.fill,),
     navigator:null,
     durationInSeconds: 7,
     logoSize:250,
