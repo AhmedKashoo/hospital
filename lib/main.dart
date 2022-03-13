@@ -4,6 +4,7 @@ import 'package:hospital/Splash_Screen.dart';
 
 void main() {
   runApp(MyApp());
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     // navigation bar color
     statusBarColor: Colors.blue.shade800, // status bar color
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.

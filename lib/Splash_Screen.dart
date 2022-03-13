@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,32 @@ class _Splash_ScreenState extends State<Splash_Screen> {
               decoration: TextDecoration.none,
               fontWeight: FontWeight.bold,
               fontSize: 40,
-              color: Colors.blue.shade800,
+              color: Colors.blue.shade900,
 
             ),
 
           ),
         ),
+            Padding(//1234
+            padding: const EdgeInsets.only(top: 300),
+              child:  DefaultTextStyle(
+              style:  TextStyle(
+                color: Colors.blue.shade900,
+    fontSize: 20.0,
+    ),
+    child: AnimatedTextKit(
+    animatedTexts: [
+    WavyAnimatedText('For  Better  Life'),
+    ],
+    isRepeatingAnimation: true,
+    onTap: () {
+    print("Tap Event");
+    },
+    ),
+    )
+    ),
+
+
       ],
 
     );
