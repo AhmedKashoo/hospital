@@ -47,3 +47,34 @@ Widget button ({
     ),
   ),
 );
+Widget notif()=>Container(
+  width: 60,
+  child: Column(
+    children: [
+      Stack(
+        alignment: AlignmentDirectional.bottomEnd,
+        children: [
+          CircleAvatar(
+            radius: 30,
+            child: Image.asset('image/logo2.png'),
+
+          ),
+          CircleAvatar(
+            radius: 10,
+            backgroundColor: Colors.white,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 2,right: 2),
+            child: CircleAvatar(
+              radius: 8,
+              backgroundColor: Colors.green,
+            ),
+          ),
+
+        ],
+      ),
+      Text('abdo Mahrous Elbhery' ,maxLines: 2,overflow: TextOverflow.ellipsis,)
+    ],
+  ),
+);
+
