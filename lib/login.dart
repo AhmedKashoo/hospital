@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital/HospitalHome.dart';
 import 'package:hospital/components/components.dart';
 
 class Login extends StatefulWidget {
@@ -109,7 +110,9 @@ class _LoginState extends State<Login> {
                         button(
                           isupper: true,
                             text: 'Sign in',
-                            function: (){}
+                            function: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalHome()));
+                            }
                         )
                       ],
                     ),
