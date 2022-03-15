@@ -10,14 +10,15 @@ class Hospital_Chat extends StatefulWidget {
 }
 
 class _Hospital_ChatState extends State<Hospital_Chat> {
+  Color c = const Color.fromARGB(232,234,245,245);
   var search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: c,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text('Chatting',style: TextStyle(
             fontSize: 30,
@@ -30,22 +31,19 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 100),
-              child: Container(
-                height: 60,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15)
-                  ),
-                  child: form(
-                    color: Colors.white,
-                    controlled_text: search,
-                      text: 'Search here',
-                      input_type: TextInputType.text,
-                    prefix_icon: Icons.search,
-                  )
-              ),
+            Container(
+              height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                child: form(
+                  color: Colors.white,
+                  controlled_text: search,
+                    text: 'Search here',
+                    input_type: TextInputType.text,
+                  prefix_icon: Icons.search,
+                )
             ),
             SizedBox(height: 15,),
             Expanded(

@@ -112,7 +112,7 @@ Widget chatting()=>Container(
         children: [
           SizedBox(width: 10,),
           IconButton(onPressed: (){},
-              icon: Icon(Icons.message)
+              icon: Icon(Icons.message,color: Colors.blue,)
           )
         ],
 
