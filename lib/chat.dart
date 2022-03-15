@@ -20,10 +20,13 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
-          child: Text('Chatting',style: TextStyle(
-            fontSize: 30,
-            color: Colors.black
-          ),),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 45.0),
+            child: Text('Chatting',style: TextStyle(
+              fontSize: 30,
+              color: Colors.blue.shade900
+            ),),
+          ),
         ),
       ),
       body: Padding(

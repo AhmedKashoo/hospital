@@ -55,6 +55,11 @@ flutter:
     - image/doc.png
     - image/med.jpg
     - image/hos.jpeg
+    - image/doclogo.png
+    - image/nurse.jpg
+    - image/patient1.png
+    - image/patient.png
+    - image/blood.png
 
 
         # An image asset can refer to one or more resolution-specific "variants", see

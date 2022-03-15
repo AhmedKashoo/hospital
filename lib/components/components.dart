@@ -25,7 +25,10 @@ Widget form({
     fillColor: color,
     filled: true,
     labelText:text,
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15),borderSide: BorderSide(
+      color: Colors.blue.shade900,
+    ), ),
     prefixIcon: Icon(prefix_icon),
     suffixIcon: suffix_icon != null ?  IconButton(onPressed: visible_function,
       icon: Icon(suffix_icon),) :null,
@@ -40,6 +43,7 @@ Widget button ({
 })=>Container(
   decoration: BoxDecoration(
     color: color,
+
     borderRadius: BorderRadius.circular(10)
   ),
   width: width,
@@ -59,6 +63,7 @@ Widget chatting()=>Container(
   height: 80,
 
   decoration: BoxDecoration(
+    border: Border.all(color: Colors.blue.shade900),
 
     borderRadius: BorderRadius.circular(15),
 
