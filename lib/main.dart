@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hospital/Splash_Screen.dart';
 import 'package:hospital/chat.dart';
+import 'package:hospital/doctor.dart';
 import 'package:hospital/login.dart';
 
 import 'OnBordingScreen.dart';
