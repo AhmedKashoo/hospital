@@ -9,6 +9,7 @@ Widget form({
   var suffix_icon ,
   var visible_function,
   var color,
+  double bordercercuilar = 15.0,
   var fontcolor,
   bool obscureText = false,
   required TextInputType input_type,
@@ -26,7 +27,7 @@ Widget form({
     filled: true,
     labelText:text,
 
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15),borderSide: BorderSide(
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(bordercercuilar),borderSide: BorderSide(
       color: Colors.blue.shade900,
     ), ),
     prefixIcon: Icon(prefix_icon),

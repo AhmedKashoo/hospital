@@ -19,6 +19,10 @@ class _doctorState extends State<doctor> {
   var namecontroll = TextEditingController();
   var mailcontroll = TextEditingController();
   var datecontroll = TextEditingController();
+  var patientdatecontroll = TextEditingController();
+  var hourscontroll = TextEditingController();
+  var numpatientscontroll = TextEditingController();
+  var searchcontroll = TextEditingController();
   var pass = TextEditingController();
   String ?dropdownValue = null;
 
@@ -249,34 +253,102 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               GestureDetector(
                                   onTap: (){
-    Dialog errorDialog = Dialog(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)), //this right here
-    child: Container(
-    height: 300.0,
-    width: 300.0,
+                              Dialog errorDialog = Dialog(
+                                elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                side: BorderSide(color: Colors.blue,width: 2)
+                              ), //this right here
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                height: 500.0,
+                                width: 300.0,
 
-    child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-    Padding(
-    padding:  EdgeInsets.all(15.0),
-    child: Text('Cool', style: TextStyle(color: Colors.red),),
-    ),
-    Padding(
-    padding: EdgeInsets.all(15.0),
-    child: Text('Awesome', style: TextStyle(color: Colors.red),),
-    ),
-    Padding(padding: EdgeInsets.only(top: 50.0)),
-    TextButton(onPressed: () {
-    Navigator.of(context).pop();
-    },
-    child: Text('Got It!', style: TextStyle(color: Colors.purple, fontSize: 18.0),))
-    ],
-    ),
-    ),
-    );
-    showDialog(context: context, builder: (BuildContext context) => errorDialog);}
-                                  ,
+                                child: SingleChildScrollView(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text('Doctor Schedule',style: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold
+                                      ),
+                                      ),
+                                      SizedBox(height: 10,),
+                                      form(
+                                        bordercercuilar: 15.0,
+                                          controlled_text:hourscontroll
+                                          , text: 'Work hours',
+                                          input_type: TextInputType.number,
+                                        prefix_icon: Icons.lock_clock
+                                      ),
+                                    SizedBox(height: 10,),
+
+                                      form(
+                                          bordercercuilar: 15.0,
+                                          controlled_text:numpatientscontroll
+                                          , text: 'number of patients',
+                                          input_type: TextInputType.number,
+                                          prefix_icon: Icons.person
+                                      ),
+                                      SizedBox(height: 10,),
+                                      form(
+                                        controlled_text: patientdatecontroll,
+                                        text: 'Birth Date',
+                                        tap: () {
+                                          showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.now(),
+                                              firstDate: DateTime(1960,8),
+                                              lastDate: DateTime.parse(
+                                                  '2022-11-20'))
+                                              .then((value) {
+                                            patientdatecontroll.text =
+                                                DateFormat.yMMMd()
+                                                    .format(value!);
+                                          });
+                                        },
+                                        prefix_icon: Icons.calendar_today,
+                                        input_type: TextInputType.datetime,
+                                      ),
+                                      SizedBox(height: 10,),
+                                      Container(
+                                        height: 50,
+                                        width: 250,
+                                        child: form(
+                                            controlled_text: searchcontroll,
+                                            text:'Add Patient' ,
+                                            input_type:TextInputType.number ),
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Container(
+                                        height: 90,
+                                        width: 250,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.transparent,
+                                          border: Border.all(color: Colors.black)
+                                        ),
+                                      ),
+                                      Padding(padding: EdgeInsets.only(top: 10.0)),
+                                    TextButton(onPressed: () {
+                                    Navigator.of(context).pop();
+                                    },
+                                    child: Text('Done', style: TextStyle(color: Colors.blue, fontSize: 18.0),))
+                                    ],
+                                    ),
+                                  ),
+                                ),
+                                ),
+                              ),
+                              );
+                              showDialog(context: context, builder: (BuildContext context) => errorDialog);}
+                                                            ,
                                   child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
                             ),
                           ]),
