@@ -1,18 +1,18 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/components/components.dart';
 import 'package:intl/intl.dart';
 
-class doctor extends StatefulWidget {
-  const doctor({Key? key}) : super(key: key);
+class patient extends StatefulWidget {
+  const patient({Key? key}) : super(key: key);
 
   @override
-  _doctorState createState() => _doctorState();
+  _patientState createState() => _patientState();
 }
 
-class _doctorState extends State<doctor> {
+class _patientState extends State<patient> {
   bool floatbot = false;
   var scaffoldkey = GlobalKey<ScaffoldState>();
   var formkey = GlobalKey<FormState>();
@@ -35,7 +35,7 @@ class _doctorState extends State<doctor> {
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.only(right: 50.0),
-          child: Center(child: Text('Doctor List',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
+          child: Center(child: Text('Patient List',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
         ),
         backgroundColor: Colors.blue.shade800,
       ),
@@ -62,7 +62,8 @@ class _doctorState extends State<doctor> {
                       DataColumn(label: Text('Name',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                       DataColumn(label: Text('Email',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                       DataColumn(label: Text('Age',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                      DataColumn(label: Text('Specialization',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                      DataColumn(label: Text('Add Medical Record',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+
                     ],
                     rows: [
                       DataRow(
@@ -85,16 +86,86 @@ class _doctorState extends State<doctor> {
                               },
                             ),
                             DataCell(
-                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
-                              Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
                               Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
-                              Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              GestureDetector(
+                                  onTap: (){},
+                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
+                            ),
+                          ]),
+                      DataRow(
+                          selected: 1 == selectedIndex,
+                          onSelectChanged: (val) {
+                            setState(() {
+                              selectedIndex = 1;
+
+                            });
+                          },
+                          cells: [
+                            DataCell(
+                              CircleAvatar(
+                                backgroundImage: AssetImage('image/doc.png'),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  color = Colors.lightBlueAccent;
+                                });
+                              },
+                            ),
+                            DataCell(
+                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
+                            ),
+                            DataCell(
+                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
+                            ),
+                            DataCell(
+                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
+                            ),
+                            DataCell(
+                              GestureDetector(
+                                  onTap: (){},
+                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
+                            ),
+                          ]),
+                      DataRow(
+                          selected: 2 == selectedIndex,
+                          onSelectChanged: (val) {
+                            setState(() {
+                              selectedIndex = 2;
+
+                            });
+                          },
+                          cells: [
+                            DataCell(
+                              CircleAvatar(
+                                backgroundImage: AssetImage('image/doc.png'),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  color = Colors.lightBlueAccent;
+                                });
+                              },
+                            ),
+                            DataCell(
+                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
+                            ),
+                            DataCell(
+                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
+                            ),
+                            DataCell(
+                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
+                            ),
+                            DataCell(
+                              GestureDetector(
+                                  onTap: (){},
+                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
                             ),
                           ]),
                       DataRow(
@@ -117,16 +188,18 @@ class _doctorState extends State<doctor> {
                               },
                             ),
                             DataCell(
-                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
-                              Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
                               Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
-                              Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              GestureDetector(
+                                  onTap: (){},
+                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
                             ),
                           ]),
                       DataRow(
@@ -149,146 +222,21 @@ class _doctorState extends State<doctor> {
                               },
                             ),
                             DataCell(
-                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
-                              Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
                               Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
-                              Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              GestureDetector(
+                                  onTap: (){},
+                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
                             ),
                           ]),
-                      DataRow(
-                          selected: 0 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 0;
 
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                          ]),
-                      DataRow(
-                          selected: 0 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 0;
-
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                          ]),
-                      DataRow(
-                          selected: 0 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 0;
-
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                          ]),
-                      DataRow(
-                          selected: 0 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 0;
-
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                          ]),
 
                     ],
                   ),
@@ -348,7 +296,7 @@ class _doctorState extends State<doctor> {
 
                                 ),
                                 child: DropdownButtonFormField<String>(
-                                  hint: Text('Doctor\'s specialty'),
+                                  hint: Text('blood types'),
                                   value: dropdownValue,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
@@ -361,7 +309,7 @@ class _doctorState extends State<doctor> {
                                       dropdownValue = newValue!;
                                     });
                                   },
-                                  items: <String>['Dentist', 'Cardiologist', 'Neurologist', 'Dermatologist','Emergency','Psychiatrist','Surgeon','Pediatrician ','Radiologist','Hematologist','Oncologist']
+                                  items: <String>['A', '+A', '-A', 'B','-B','+B','+AB','AB ','+AB','-AB','O','+O','-O']
                                       .map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
