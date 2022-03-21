@@ -63,8 +63,6 @@ class _doctorState extends State<doctor> {
                       DataColumn(label: Text('Email',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                       DataColumn(label: Text('Age',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                       DataColumn(label: Text('Specialization',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                      DataColumn(label: Text('Doctor Schedule',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-
                     ],
                     rows: [
                       DataRow(
@@ -87,7 +85,7 @@ class _doctorState extends State<doctor> {
                               },
                             ),
                             DataCell(
-                             Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              Center(child: Text('Doctor Name',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
                             DataCell(
                               Center(child: Text('Doctor@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
@@ -98,17 +96,12 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
                           ]),
                       DataRow(
-                          selected: 1 == selectedIndex,
+                          selected: 0 == selectedIndex,
                           onSelectChanged: (val) {
                             setState(() {
-                              selectedIndex = 1;
+                              selectedIndex = 0;
 
                             });
                           },
@@ -135,17 +128,12 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
                           ]),
                       DataRow(
-                          selected: 2 == selectedIndex,
+                          selected: 0 == selectedIndex,
                           onSelectChanged: (val) {
                             setState(() {
-                              selectedIndex = 2;
+                              selectedIndex = 0;
 
                             });
                           },
@@ -172,17 +160,12 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
                           ]),
                       DataRow(
-                          selected: 3 == selectedIndex,
+                          selected: 0 == selectedIndex,
                           onSelectChanged: (val) {
                             setState(() {
-                              selectedIndex = 3;
+                              selectedIndex = 0;
 
                             });
                           },
@@ -209,17 +192,12 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
                           ]),
                       DataRow(
-                          selected: 4 == selectedIndex,
+                          selected: 0 == selectedIndex,
                           onSelectChanged: (val) {
                             setState(() {
-                              selectedIndex = 4;
+                              selectedIndex = 0;
 
                             });
                           },
@@ -246,17 +224,12 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
                           ]),
                       DataRow(
-                          selected: 5 == selectedIndex,
+                          selected: 0 == selectedIndex,
                           onSelectChanged: (val) {
                             setState(() {
-                              selectedIndex = 5;
+                              selectedIndex = 0;
 
                             });
                           },
@@ -283,17 +256,12 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
                           ]),
                       DataRow(
-                          selected: 6 == selectedIndex,
+                          selected: 0 == selectedIndex,
                           onSelectChanged: (val) {
                             setState(() {
-                              selectedIndex = 6;
+                              selectedIndex = 0;
 
                             });
                           },
@@ -320,12 +288,6 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               Center(child: Text('heart disease',style: TextStyle(fontWeight: FontWeight.bold),)),
                             ),
-                            DataCell(
-                              GestureDetector(
-                                onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
-
                           ]),
 
                     ],
@@ -337,127 +299,127 @@ class _doctorState extends State<doctor> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: button(
-                text: 'Create Doctor',
-                function: (){
-                    scaffoldkey.currentState
-                        ?.showBottomSheet(
-                            (context)=>Form(
-                          key: formkey,
-                          child: StatefulBuilder(
-                            builder: (BuildContext context, StateSetter setbotstate)=>Container(
-                              color: c,
-                              padding: EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  form(
-                                      controlled_text: namecontroll,
-                                      text: 'Name',
-                                      prefix_icon: Icons.person,
-                                      input_type: TextInputType.text),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  form(
-                                    input_type: TextInputType.name,
-                                    text: 'Password',
-                                    controlled_text: pass,
-                                    prefix_icon: Icons.lock,
-                                    visible_function: (){
-                                      setbotstate(() {
-                                        isvisible = !isvisible;
-                                      });
-                                    },
-                                    suffix_icon: isvisible? Icons.visibility : Icons.visibility_off,
-                                    obscureText: isvisible,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                    height: 65,
-                                    decoration: BoxDecoration(
-                                      color: c,
-                                      border: Border.all(
-                                          width: 0.5
-                                      ),
-                                      borderRadius: BorderRadius.circular(15),
-
-                                    ),
-                                    child: DropdownButtonFormField<String>(
-                                      hint: Text('Doctor\'s specialty'),
-                                      value: dropdownValue,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-
-                                      ),
-                                      icon: const Icon(Icons.arrow_downward),
-                                      style: const TextStyle(color: Colors.black,fontSize: 18),
-                                      onChanged: (String? newValue) {
-                                        setbotstate(() {
-                                          dropdownValue = newValue!;
-                                        });
-                                      },
-                                      items: <String>['Dentist', 'Cardiologist', 'Neurologist', 'Dermatologist','Emergency','Psychiatrist','Surgeon','Pediatrician ','Radiologist','Hematologist','Oncologist']
-                                          .map<DropdownMenuItem<String>>((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  form(
-                                    controlled_text: mailcontroll,
-                                    text: 'E-mail',
-                                    prefix_icon: Icons.email,
-                                    input_type: TextInputType.emailAddress,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  form(
-                                    controlled_text: datecontroll,
-                                    text: 'Birth Date',
-                                    tap: () {
-                                      showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime(1960,8),
-                                          lastDate: DateTime.parse(
-                                              '2022-11-20'))
-                                          .then((value) {
-                                        datecontroll.text =
-                                            DateFormat.yMMMd()
-                                                .format(value!);
-                                      });
-                                    },
-                                    prefix_icon: Icons.calendar_today,
-                                    input_type: TextInputType.datetime,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  button(
-                                      text: 'Apply',
-                                      color: Colors.blue.shade800,
-                                      function: (){
-                                        Navigator.pop(context);
-                                      })
-                                ],
+              text: 'Create Doctor',
+              function: (){
+                scaffoldkey.currentState
+                    ?.showBottomSheet(
+                        (context)=>Form(
+                      key: formkey,
+                      child: StatefulBuilder(
+                        builder: (BuildContext context, StateSetter setbotstate)=>Container(
+                          color: c,
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              form(
+                                  controlled_text: namecontroll,
+                                  text: 'Name',
+                                  prefix_icon: Icons.person,
+                                  input_type: TextInputType.text),
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
+                              form(
+                                input_type: TextInputType.name,
+                                text: 'Password',
+                                controlled_text: pass,
+                                prefix_icon: Icons.lock,
+                                visible_function: (){
+                                  setbotstate(() {
+                                    isvisible = !isvisible;
+                                  });
+                                },
+                                suffix_icon: isvisible? Icons.visibility : Icons.visibility_off,
+                                obscureText: isvisible,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                height: 65,
+                                decoration: BoxDecoration(
+                                  color: c,
+                                  border: Border.all(
+                                      width: 0.5
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+
+                                ),
+                                child: DropdownButtonFormField<String>(
+                                  hint: Text('Doctor\'s specialty'),
+                                  value: dropdownValue,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+
+                                  ),
+                                  icon: const Icon(Icons.arrow_downward),
+                                  style: const TextStyle(color: Colors.black,fontSize: 18),
+                                  onChanged: (String? newValue) {
+                                    setbotstate(() {
+                                      dropdownValue = newValue!;
+                                    });
+                                  },
+                                  items: <String>['Dentist', 'Cardiologist', 'Neurologist', 'Dermatologist','Emergency','Psychiatrist','Surgeon','Pediatrician ','Radiologist','Hematologist','Oncologist']
+                                      .map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              form(
+                                controlled_text: mailcontroll,
+                                text: 'E-mail',
+                                prefix_icon: Icons.email,
+                                input_type: TextInputType.emailAddress,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              form(
+                                controlled_text: datecontroll,
+                                text: 'Birth Date',
+                                tap: () {
+                                  showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1960,8),
+                                      lastDate: DateTime.parse(
+                                          '2022-11-20'))
+                                      .then((value) {
+                                    datecontroll.text =
+                                        DateFormat.yMMMd()
+                                            .format(value!);
+                                  });
+                                },
+                                prefix_icon: Icons.calendar_today,
+                                input_type: TextInputType.datetime,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              button(
+                                  text: 'Apply',
+                                  color: Colors.blue.shade800,
+                                  function: (){
+                                    Navigator.pop(context);
+                                  })
+                            ],
                           ),
                         ),
-                        elevation: 15
-                    );
+                      ),
+                    ),
+                    elevation: 15
+                );
 
-                },
-                color: Colors.blue.shade900,
+              },
+              color: Colors.blue.shade900,
             ),
           )
 
