@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hospital/Splash_Screen.dart';
 import 'package:hospital/chat.dart';
+import 'package:hospital/components/chat2.dart';
 import 'package:hospital/doctor.dart';
 import 'package:hospital/login.dart';
 
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Splash_Screen()
+      home:Hospital_Chat()
     );
   }
 }

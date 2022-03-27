@@ -6,9 +6,11 @@ Widget form({
    var validator,
   var tap ,
   var prefix_icon,
+  var suffix_color,
   var suffix_icon ,
   var visible_function,
   var color,
+  var border_colors=Colors.black,
   double bordercercuilar = 15.0,
   var fontcolor,
   bool obscureText = false,
@@ -26,14 +28,21 @@ Widget form({
     fillColor: color,
     filled: true,
     labelText:text,
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(bordercercuilar),
+      borderSide: BorderSide(
+      color: border_colors,
+    ),
+    ),
+    border:  OutlineInputBorder(
+      borderRadius: BorderRadius.circular(bordercercuilar),
 
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(bordercercuilar),borderSide: BorderSide(
-      color: Colors.blue.shade900,
-    ), ),
+    ),
     prefixIcon: Icon(prefix_icon),
     suffixIcon: suffix_icon != null ?  IconButton(onPressed: visible_function,
-      icon: Icon(suffix_icon),) :null,
-  ),);
+      icon: Icon(suffix_icon),color: suffix_color,) :null,
+  ),
+);
 
 Widget button ({
   double width = double.infinity,
@@ -59,12 +68,12 @@ Widget button ({
     ),
   ),
 );
-Widget chatting()=>Container(
+Widget chatting({var ontap})=>Container(
 
   height: 80,
 
   decoration: BoxDecoration(
-    border: Border.all(color: Colors.blue.shade900),
+    border: Border.all(color: Colors.transparent),
 
     borderRadius: BorderRadius.circular(15),
 
@@ -72,27 +81,26 @@ Widget chatting()=>Container(
 
   ),
 
-  child:   Row(
+  child:   Container(
+    child: Row(
 
-    children: [
+      children: [
 
-      Padding(
-        padding: const EdgeInsets.all(18.0),
-        child:
-            CircleAvatar(
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child:
+              CircleAvatar(
 
-              radius: 25,
+                radius: 35,
 
-              child: Image.asset('image/logo2.png'),
+                child: Image.asset('image/logo2.png'),
 
-            ),
-      ),
+              ),
+        ),
 
-      SizedBox(width: 8,),
+        SizedBox(width: 8,),
 
-      Expanded(
-
-        child: Padding(
+        Padding(
           padding: const EdgeInsets.only(bottom: 22 ),
           child: Column(
 
@@ -101,7 +109,7 @@ Widget chatting()=>Container(
 
             children: [
 
-              Text('Dr.Ba7R',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15)
+              Text('Dr.Ba7R',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)
                 ,maxLines: 1,overflow: TextOverflow.ellipsis,),
               Text('Hello My name is Ba7r',maxLines: 2,overflow: TextOverflow.ellipsis),
 
@@ -111,21 +119,20 @@ Widget chatting()=>Container(
 
           ),
         ),
+        SizedBox(width: 30,),
+        Row(
+          children: [
+            SizedBox(width: 10,),
+            IconButton(onPressed: ontap,
+                icon: Icon(Icons.message,color: Colors.blue,)
+            )
+          ],
 
+        ),
 
-      ),
-      Row(
-        children: [
-          SizedBox(width: 10,),
-          IconButton(onPressed: (){},
-              icon: Icon(Icons.message,color: Colors.blue,)
-          )
-        ],
+      ],
 
-      ),
-
-    ],
-
+    ),
   ),
 
 );
