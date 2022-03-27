@@ -14,6 +14,10 @@ class _Chatting2State extends State<Chatting2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor:  Colors.blue.shade800,
+        elevation: 0,
+      ),
       backgroundColor: Colors.blue.shade800,
       body: Stack(
         children: [

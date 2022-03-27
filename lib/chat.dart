@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hospital/components/chat2.dart';
+import 'package:hospital/chat2.dart';
 
 import 'components/components.dart';
 
@@ -13,11 +13,11 @@ class Hospital_Chat extends StatefulWidget {
 class _Hospital_ChatState extends State<Hospital_Chat> {
   Color c = const Color.fromARGB(232,234,245,245);
   var search = TextEditingController();
+  bool change=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.blue.shade800,
-
       body: Stack(
         children: [
           Container(
@@ -41,13 +41,32 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
                   ),),
                     ),
                       SizedBox(height: 10,),
-                      form(
-                        color: Colors.white,
-                        controlled_text: search,
-                        text: 'Search here',
-                        input_type: TextInputType.text,
-                        prefix_icon: Icons.search,
-                      ),
+                      Container(
+                        child:  change ? CircleAvatar(
+                          radius: 25,
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            onPressed:(){setState(() {
+                              change=!change;
+                            });} ,
+                            icon: Icon(Icons.search),
+                            color: Colors.blue,
+                            iconSize: 30,
+                          ),
+                        )
+                            :
+                        form(
+                          color: Colors.white,
+                          controlled_text: search,
+                          text: 'Search here',
+                          input_type: TextInputType.text,
+                          prefix_icon: Icons.search,
+                          suffix_icon: Icons.cancel,
+                          visible_function: (){setState(() {
+                            change=!change;
+                          });}
+                        ),
+                      )
                     ],
                   )
               ),
