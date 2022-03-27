@@ -323,7 +323,9 @@ class _doctorState extends State<doctor> {
                                         child: form(
                                             controlled_text: searchcontroll,
                                             text:'Add Patient' ,
-                                            input_type:TextInputType.number ),
+                                            input_type:TextInputType.number,
+                                          prefix_icon: Icons.person_add
+                                        ),
                                       ),
                                       SizedBox(height: 20,),
                                       Container(
@@ -437,7 +439,7 @@ class _doctorState extends State<doctor> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: button(
-                text: 'Create Doctor',
+                text: 'Add Doctor',
                 function: (){
                     scaffoldkey.currentState
                         ?.showBottomSheet(

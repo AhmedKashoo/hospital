@@ -247,7 +247,7 @@ class _patientState extends State<patient> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: button(
-              text: 'Create Doctor',
+              text: 'Add Patient',
               function: (){
                 scaffoldkey.currentState
                     ?.showBottomSheet(
