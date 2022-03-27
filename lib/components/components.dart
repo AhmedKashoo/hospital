@@ -86,48 +86,50 @@ Widget chatting({var ontap})=>Container(
 
       children: [
 
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child:
-              CircleAvatar(
+        Expanded(
+          child: CircleAvatar(
 
-                radius: 35,
+            radius: 30,
 
-                child: Image.asset('image/logo2.png'),
+            child: Image.asset('image/logo2.png'),
 
-              ),
+          ),
         ),
 
         SizedBox(width: 8,),
 
-        Padding(
-          padding: const EdgeInsets.only(bottom: 22 ),
-          child: Column(
+        Expanded(
+          flex: 2,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 22 ),
+            child: Column(
 
-            crossAxisAlignment:CrossAxisAlignment.start ,
-            mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment:CrossAxisAlignment.start ,
+              mainAxisAlignment: MainAxisAlignment.end,
 
+              children: [
+
+                Text('Dr.Ba7R',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)
+                  ,maxLines: 1,overflow: TextOverflow.ellipsis,),
+                Text('Hello My name is Ba7r',maxLines: 2,overflow: TextOverflow.ellipsis),
+
+
+
+              ],
+
+            ),
+          ),
+        ),
+        Expanded(
+          child: Row(
             children: [
-
-              Text('Dr.Ba7R',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)
-                ,maxLines: 1,overflow: TextOverflow.ellipsis,),
-              Text('Hello My name is Ba7r',maxLines: 2,overflow: TextOverflow.ellipsis),
-
-
-
+              SizedBox(width: 10,),
+              IconButton(onPressed: ontap,
+                  icon: Icon(Icons.message,color: Colors.blue,)
+              )
             ],
 
           ),
-        ),
-        SizedBox(width: 30,),
-        Row(
-          children: [
-            SizedBox(width: 10,),
-            IconButton(onPressed: ontap,
-                icon: Icon(Icons.message,color: Colors.blue,)
-            )
-          ],
-
         ),
 
       ],
