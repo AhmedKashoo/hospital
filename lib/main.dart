@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:doctor()
+      home:Splash_Screen()
     );
   }
 }

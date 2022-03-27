@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital/MedicalRecord.dart';
 import 'package:hospital/patient.dart';
 
 import 'components/components.dart';
@@ -184,36 +185,42 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
                 Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.white,
-                            border:Border.all(color: Colors.blue.shade900)
-                        ),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchPage()));
 
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(image: AssetImage('image/patient.png',),height: 40,width: 40,),
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Text('Record',style: TextStyle(color: Colors.blue.shade900,fontSize: 22,fontWeight: FontWeight.w600),),
-                                ),
-                                Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10.0),
-                                  child: Text('250',style: TextStyle(color: Colors.blue.shade900,fontWeight: FontWeight.w500),),
-                                )
-                              ],
-                            ),
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
+                              border:Border.all(color: Colors.blue.shade900)
+                          ),
+
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image(image: AssetImage('image/patient.png',),height: 40,width: 40,),
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text('Record',style: TextStyle(color: Colors.blue.shade900,fontSize: 22,fontWeight: FontWeight.w600),),
+                                  ),
+                                  Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10.0),
+                                    child: Text('250',style: TextStyle(color: Colors.blue.shade900,fontWeight: FontWeight.w500),),
+                                  )
+                                ],
+                              ),
 
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     )),
