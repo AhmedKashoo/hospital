@@ -18,13 +18,23 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.blue.shade800,
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade800,
+        title:Center(
+          child: Text('Chatting',style: TextStyle(
+              fontSize: 30,
+              color: Colors.white
+          ),),
+        ),
+        elevation: 0,
+      ),
       body: Stack(
         children: [
           Container(
             height: double.infinity,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.only(top: 80,left: 10),
+              padding: const EdgeInsets.only(top: 38,left: 10),
               child:Container(
                   height: 60,
                   width: double.infinity,
@@ -34,37 +44,37 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Center(
-                      child: Text('Chatting',style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white
-                  ),),
-                    ),
-                      SizedBox(height: 10,),
-                      Container(
-                        child:  change ? CircleAvatar(
-                          radius: 25,
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                            onPressed:(){setState(() {
+                      Padding(
+                        padding: const EdgeInsets.only(right:20.0,left: 5,),
+                        child: Container(
+                          child:  change ? Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: CircleAvatar(
+                              radius: 22,
+                              backgroundColor: Colors.blue.shade100,
+                              child: IconButton(
+                                onPressed:(){setState(() {
+                                  change=!change;
+                                  print('hi');
+                                });} ,
+                                icon: Icon(Icons.search),
+                                color: Colors.black,
+                                iconSize: 30,
+                              ),
+                            ),
+                          )
+                              :
+                          form(
+                            color: Colors.white,
+                            controlled_text: search,
+                            text: 'Search here',
+                            input_type: TextInputType.text,
+                            prefix_icon: Icons.search,
+                            suffix_icon: Icons.cancel,
+                            visible_function: (){setState(() {
                               change=!change;
-                            });} ,
-                            icon: Icon(Icons.search),
-                            color: Colors.blue,
-                            iconSize: 30,
+                            });}
                           ),
-                        )
-                            :
-                        form(
-                          color: Colors.white,
-                          controlled_text: search,
-                          text: 'Search here',
-                          input_type: TextInputType.text,
-                          prefix_icon: Icons.search,
-                          suffix_icon: Icons.cancel,
-                          visible_function: (){setState(() {
-                            change=!change;
-                          });}
                         ),
                       )
                     ],
@@ -74,7 +84,7 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 200.0),
+            padding: const EdgeInsets.only(top: 100.0),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius:BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
