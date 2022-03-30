@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Hospital_Chat()
+      home:OnBoarding()
     );
   }
 }
