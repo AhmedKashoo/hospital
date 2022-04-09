@@ -6,7 +6,7 @@ class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();
 }
-
+//ss
 
 class _SearchPageState extends State<SearchPage> {
   String? _result;
