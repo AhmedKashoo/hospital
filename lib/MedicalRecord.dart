@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/login.dart';
+import 'package:hospital/patient_profile.dart';
 class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -13,21 +14,50 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Search')),
+      appBar: AppBar(title: Center(child: Padding(
+        padding: const EdgeInsets.only(right: 50.0),
+        child: Text('Medical Record'),
+      )),backgroundColor: Colors.blue.shade800,),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(_result ?? '', style: TextStyle(fontSize: 18)),
-            ElevatedButton(
-              onPressed: () async {
-                var result = await showSearch<String>(
-                  context: context,
-                  delegate: CustomDelegate(),
-                );
-                setState(() => _result = result);
-              },
-              child: Text('Search'),
-            ),
+
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100)
+                        ),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
+
+                          ),
+
+                          onPressed: () async {
+                            var result = await showSearch<String>(
+                              context: context,
+                              delegate: CustomDelegate(),
+                            );
+                            setState(() => _result = result);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Center(child: Text('Search',style: TextStyle(fontSize: 18),)),
+                          ),
+
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
           ],
         ),
       ),
@@ -37,24 +67,20 @@ class _SearchPageState extends State<SearchPage> {
 //dd
 class CustomDelegate extends SearchDelegate<String> {
   static List<String> mainDataList = [
-    "Apple",
-    "Apricot",
-    "Banana",
-    "Blackberry",
-    "Coconut",
-    "Date",
-    "Fig",
-    "Gooseberry",
-    "Grapes",
-    "Lemon",
-    "Litchi",
-    "Mango",
-    "Orange",
-    "Papaya",
-    "Peach",
-    "Pineapple",
-    "Pomegranate",
-    "Starfruit"
+    "3000801161082",
+    "3010801161082",
+    "3002801161082",
+    "30055801161082",
+    "23300801161082",
+    "2880801161082",
+    "3000801161082",
+    "1990801161082",
+    "3000901161082",
+    "4000801161082",
+    "5000801161082",
+    "55000801161082",
+    "7000801161082",
+
   ];
   List<String> data = mainDataList.take(100).toList();
 
@@ -82,7 +108,7 @@ class CustomDelegate extends SearchDelegate<String> {
         return ListTile(
           title: Text(noun),
           onLongPress: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>patient_profile()));
 
           },
           onTap: () => close(context, noun),
