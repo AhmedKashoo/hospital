@@ -21,7 +21,7 @@ class _HospitalHomeState extends State<HospitalHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue.shade800,),
+      appBar: AppBar(backgroundColor: Colors.blue.shade800,elevation: 0,),
       body: screens[currentindex],
       bottomNavigationBar: Container(
 

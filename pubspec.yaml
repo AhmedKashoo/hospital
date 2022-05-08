@@ -35,6 +35,7 @@ dependencies:
   intl: ^0.17.0
   image_picker: ^0.7.2+1
   file_picker: ^4.1.3
+  hexcolor: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +64,7 @@ flutter:
     - image/patient1.png
     - image/patient.png
     - image/blood.png
-
+    - image/4003790.png
 
         # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -76,10 +77,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family:
+      fonts:
+        - asset: image/MyFlutterApp.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

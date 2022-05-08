@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hospital/chat2.dart';
+import 'package:hospital/components/components.dart';
+import 'package:hospital/patient/chat2_patient.dart';
 
-import 'components/components.dart';
 
-class Hospital_Chat extends StatefulWidget {
-  const Hospital_Chat({Key? key}) : super(key: key);
+class Patient_Chat extends StatefulWidget {
+  const Patient_Chat({Key? key}) : super(key: key);
 
   @override
-  State<Hospital_Chat> createState() => _Hospital_ChatState();
+  State<Patient_Chat> createState() => _Patient_ChatState();
 }
 
-class _Hospital_ChatState extends State<Hospital_Chat> {
+class _Patient_ChatState extends State<Patient_Chat> {
   Color c = const Color.fromARGB(232,234,245,245);
   var search = TextEditingController();
   bool change=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
         backgroundColor: Colors.blue.shade800,
       body: Stack(
         children: [
@@ -98,7 +103,7 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
                       child: Container(
                         child: ListView.separated(
                           itemBuilder:(context,index)=>chatting(
-                            ontap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatting2()));}
+                            ontap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatting2_patient()));}
                           )
                           , separatorBuilder: (context,index)=>SizedBox(height: 25,)
                           , itemCount:10 ,scrollDirection: Axis.vertical,),

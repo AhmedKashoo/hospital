@@ -5,6 +5,7 @@ import 'package:hospital/chat.dart';
 import 'package:hospital/chat2.dart';
 import 'package:hospital/doctor.dart';
 import 'package:hospital/login.dart';
+import 'package:hospital/patient/home.dart';
 
 import 'OnBordingScreen.dart';
 
