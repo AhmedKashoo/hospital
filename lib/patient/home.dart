@@ -3,8 +3,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/components/my_flutter_app_icons.dart';
+import 'package:hospital/patient/chat2_patient.dart';
 import 'package:hospital/patient/chat_patient.dart';
 import 'package:hospital/patient/patient%20med.dart';
+
+import '../login.dart';
 
 class Patient_home extends StatefulWidget {
   const Patient_home({Key? key}) : super(key: key);
@@ -20,15 +23,14 @@ class _Patient_homeState extends State<Patient_home> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));
-
-          },
+          onTap: (){},
             child: Icon(Icons.local_hospital,color: Colors.blueAccent,size: 30,)),
         title: Center(child: Text("Home",
           style: TextStyle(color: Colors.blueAccent,fontSize: 25,fontWeight: FontWeight.bold
         ),)),
-        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.exit_to_app,color: Colors.blueAccent,size: 30,))],
+        actions: [IconButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+        }, icon: Icon(Icons.exit_to_app,color: Colors.blueAccent,size: 30,))],
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -81,7 +83,7 @@ class _Patient_homeState extends State<Patient_home> {
             ),
             SizedBox(height: 15,),
             GestureDetector(
-              onTap: (){},
+              onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));},
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -130,7 +132,20 @@ class _Patient_homeState extends State<Patient_home> {
             ),
             SizedBox(height: 25,),
             GestureDetector(
-              onTap: (){},
+              onTap: (){
+                 showDialog(context: context, builder: (context){
+                  return AlertDialog(
+                    title: Text("Your next appointment on  ",
+                      style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
+                    content: Text("March 5th ",
+                      style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
+                    actions: [
+                      TextButton(onPressed: (){  Navigator.pop(context, 'Cancel');},
+                          child: Text('OK'))
+                    ],
+                  );
+                });
+              },
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -179,7 +194,7 @@ class _Patient_homeState extends State<Patient_home> {
             ),
             SizedBox(height: 25,),
             GestureDetector(
-              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Patient_Chat()));},
+              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatting2_patient()));},
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),

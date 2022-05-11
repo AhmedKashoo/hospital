@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital/patient/home.dart';
 import 'package:timelines/timelines.dart';
 
 class s extends StatefulWidget {
@@ -173,7 +174,11 @@ class _sState extends State<s> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading:Icon(Icons.arrow_back,color: Colors.blue,),
+        leading:IconButton(color: Colors.blue,
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Patient_home()));
+          },
+          icon: Icon(Icons.arrow_back),),
         title: Padding(
           padding: const EdgeInsets.only(right: 50.0),
           child: Center(child: Text("My Profile",style: TextStyle(color: Colors.blue),)),

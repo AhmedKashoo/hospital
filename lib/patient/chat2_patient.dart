@@ -25,12 +25,13 @@ class _Chatting2_patientState extends State<Chatting2_patient> {
             height: double.infinity,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.only(top: 45,left: 30),
-              child: Text('Chat',style: TextStyle(
+              padding: const EdgeInsets.only(top: 25,left: 30),
+              child: Text('Dr. Abdelrahman Elbhery',style: TextStyle(
                   color: Colors.white,
                   fontStyle: FontStyle.normal,
-                  fontSize: 45,
-                  fontWeight: FontWeight.bold
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  height: 1
               ),
               ),
             ),
