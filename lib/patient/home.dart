@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/components/my_flutter_app_icons.dart';
 import 'package:hospital/patient/chat_patient.dart';
+import 'package:hospital/patient/patient%20med.dart';
 
 class Patient_home extends StatefulWidget {
   const Patient_home({Key? key}) : super(key: key);
@@ -18,7 +19,12 @@ class _Patient_homeState extends State<Patient_home> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: Icon(Icons.local_hospital,color: Colors.blueAccent,size: 30,),
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));
+
+          },
+            child: Icon(Icons.local_hospital,color: Colors.blueAccent,size: 30,)),
         title: Center(child: Text("Home",
           style: TextStyle(color: Colors.blueAccent,fontSize: 25,fontWeight: FontWeight.bold
         ),)),

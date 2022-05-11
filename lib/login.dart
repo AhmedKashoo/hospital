@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/HospitalHome.dart';
 import 'package:hospital/components/components.dart';
+import 'package:hospital/patient/home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -111,7 +112,10 @@ class _LoginState extends State<Login> {
                           isupper: true,
                             text: 'Sign in',
                             function: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalHome()));
+                            if(user.toString()=='tser'){Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalHome()));}else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Patient_home()));
+                            }
+
                             }
                         )
                       ],
