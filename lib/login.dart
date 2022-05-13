@@ -112,8 +112,9 @@ class _LoginState extends State<Login> {
                           isupper: true,
                             text: 'Sign in',
                             function: (){
-                            if(user.toString()=="123"){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalHome()));}else{
+                            print('hello ${user.text}');
+                            if(user.text=="admin"){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalHome()));}else if(user.text=="patient"){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Patient_home()));
                             }
                             }
