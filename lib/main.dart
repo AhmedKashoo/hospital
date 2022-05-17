@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hospital/Doctor/doctor_home.dart';
 import 'package:hospital/Splash_Screen.dart';
 import 'package:hospital/chat.dart';
 import 'package:hospital/chat2.dart';
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Doc_home()
+      home:Splash_Screen()
     );
   }
 }

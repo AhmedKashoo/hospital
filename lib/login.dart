@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital/Doctor/doctor_home.dart';
 import 'package:hospital/HospitalHome.dart';
 import 'package:hospital/components/components.dart';
 import 'package:hospital/patient/home.dart';
@@ -116,6 +117,8 @@ class _LoginState extends State<Login> {
                             if(user.text=="admin"){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalHome()));}else if(user.text=="patient"){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Patient_home()));
+                            }else if(user.text=="doctor"){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Doc_home()));
                             }
                             }
                         )
