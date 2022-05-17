@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital/Doctor/patient_doctor_med.dart';
 
 import '../login.dart';
 
@@ -43,11 +45,14 @@ class _Doc_homeState extends State<Doc_home> {
             Text('You have the following upcoming patients today',style: TextStyle(fontSize: 20),),
             SizedBox(height: 20,),
             GestureDetector(
-              onTap: (){},
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Doctor_patient()));
+              },
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
@@ -56,13 +61,14 @@ class _Doc_homeState extends State<Doc_home> {
                           radius: 30,
                         ),
                       ),
-                      SizedBox(width: 10,),
-                      Text('Ahmed Khalid',style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.blueAccent
-                      ),),
-                      SizedBox(width: 70,),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 58.0),
+                        child: Text('Ahmed Khalid',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.blueAccent
+                        ),),
+                      ),
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -92,6 +98,7 @@ class _Doc_homeState extends State<Doc_home> {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
@@ -100,13 +107,16 @@ class _Doc_homeState extends State<Doc_home> {
                           radius: 30,
                         ),
                       ),
-                      SizedBox(width: 10,),
-                      Text('Ahmed Khalid',style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.blueAccent
-                      ),),
-                      SizedBox(width: 70,),
+
+                      Padding(
+                        padding: const EdgeInsets.only(right: 58.0),
+                        child: Text('Ahmed Khalid',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.blueAccent
+                        ),),
+                      ),
+
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -136,6 +146,7 @@ class _Doc_homeState extends State<Doc_home> {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
@@ -144,13 +155,14 @@ class _Doc_homeState extends State<Doc_home> {
                           radius: 30,
                         ),
                       ),
-                      SizedBox(width: 10,),
-                      Text('Ahmed Khalid',style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.blueAccent
-                      ),),
-                      SizedBox(width: 70,),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 58.0),
+                        child: Text('Ahmed Khalid',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.blueAccent
+                        ),),
+                      ),
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -175,11 +187,14 @@ class _Doc_homeState extends State<Doc_home> {
             ),
             SizedBox(height: 15,),
             GestureDetector(
-              onTap: (){},
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Doctor_patient()));
+              },
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
@@ -188,13 +203,14 @@ class _Doc_homeState extends State<Doc_home> {
                           radius: 30,
                         ),
                       ),
-                      SizedBox(width: 10,),
-                      Text('Ahmed Khalid',style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.blueAccent
-                      ),),
-                      SizedBox(width: 70,),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 58.0),
+                        child: Text('Ahmed Khalid',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.blueAccent
+                        ),),
+                      ),
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
