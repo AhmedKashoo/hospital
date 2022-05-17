@@ -8,7 +8,6 @@ import 'package:hospital/doctor.dart';
 import 'package:hospital/login.dart';
 import 'package:hospital/patient/home.dart';
 
-import 'Doctor/dash.dart';
 import 'OnBordingScreen.dart';
 
 void main() {

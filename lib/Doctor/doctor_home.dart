@@ -71,7 +71,7 @@ class _Doc_homeState extends State<Doc_home> {
                       ),
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 15,
                           color: Colors.blueAccent
                       ),),
                     ],
@@ -119,7 +119,7 @@ class _Doc_homeState extends State<Doc_home> {
 
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 15,
                           color: Colors.blueAccent
                       ),),
                     ],
@@ -165,7 +165,7 @@ class _Doc_homeState extends State<Doc_home> {
                       ),
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 15,
                           color: Colors.blueAccent
                       ),),
                     ],
@@ -213,7 +213,7 @@ class _Doc_homeState extends State<Doc_home> {
                       ),
                       Text('${now.hour}:${now.minute}',style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 15,
                           color: Colors.blueAccent
                       ),),
                     ],
@@ -233,7 +233,6 @@ class _Doc_homeState extends State<Doc_home> {
                 ),
               ),
             ),
-
 
           ],
         ),
