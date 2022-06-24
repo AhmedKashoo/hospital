@@ -24,7 +24,6 @@ class _patientState extends State<patient> {
   var formkey = GlobalKey<FormState>();
   var namecontroll = TextEditingController();
   var mailcontroll = TextEditingController();
-  var blod;
   var datecontroll = TextEditingController();
   var pass = TextEditingController();
   String ?dropdownValue = null;
@@ -188,12 +187,6 @@ class _patientState extends State<patient> {
                                       child: Text(value),
                                     );
                                   }).toList(),
-onSaved: (S){
-
-   setState(() {
-     blod=S;
-   });
-},
                                   //
                                 ),
                               ),
@@ -235,7 +228,7 @@ onSaved: (S){
                                   text: 'Apply',
                                   color: Colors.blue.shade800,
                                   function: ()async{
-                                    print(blod);
+                                    print(dropdownValue);
                                     http.Response response=await http.post(Uri.parse(ur),headers: {"Content-type": "application/json"},
                                         body: jsonEncode({"_id":mailcontroll.text,"password":pass.text,"fullName":namecontroll.text,"bloodType":"A+","height":175,"weight":60,"phone":"01031782430","birthDate":"1999-03-29T11:34:00.000Z","gender":"Male","address":"Mansoura,Dkahlia","donate":true,"__v":0}));
 print(response.body);
