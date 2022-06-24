@@ -539,7 +539,7 @@ class _sState extends State<s> {
 
   }
   Future<void>getallpat1()async {
-    List?list1 = await r.getAll();
+    List?list1 = await r.getAll(patient_url);
     pat!.addAll(list1!.map((e) => plog.fromJson(e)).toList());
     print(pat);
     for (int i = 0; i < pat!.length; i++) {
