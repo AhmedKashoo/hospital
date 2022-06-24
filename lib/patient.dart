@@ -230,7 +230,7 @@ class _patientState extends State<patient> {
                                   function: ()async{
                                     print(dropdownValue);
                                     http.Response response=await http.post(Uri.parse(ur),headers: {"Content-type": "application/json"},
-                                        body: jsonEncode({"_id":mailcontroll.text,"password":pass.text,"fullName":namecontroll.text,"bloodType":"A+","height":175,"weight":60,"phone":"01031782430","birthDate":"1999-03-29T11:34:00.000Z","gender":"Male","address":"Mansoura,Dkahlia","donate":true,"__v":0}));
+                                        body: jsonEncode({"_id":mailcontroll.text,"password":pass.text,"fullName":namecontroll.text,"bloodType":dropdownValue,"height":175,"weight":60,"phone":"01031782430","birthDate":"1999-03-29T11:34:00.000Z","gender":"Male","address":"Mansoura,Dkahlia","donate":true,"__v":0}));
                                     print(response.body);
                                     Navigator.pop(context);
                                   }
