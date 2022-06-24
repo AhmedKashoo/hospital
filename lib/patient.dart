@@ -1,9 +1,14 @@
 
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/components/components.dart';
+import 'package:hospital/constant.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart'as http;
+
 
 class patient extends StatefulWidget {
   const patient({Key? key}) : super(key: key);
@@ -15,9 +20,11 @@ class patient extends StatefulWidget {
 class _patientState extends State<patient> {
   bool floatbot = false;
   var scaffoldkey = GlobalKey<ScaffoldState>();
+
   var formkey = GlobalKey<FormState>();
   var namecontroll = TextEditingController();
   var mailcontroll = TextEditingController();
+  var blod;
   var datecontroll = TextEditingController();
   var pass = TextEditingController();
   String ?dropdownValue = null;
@@ -100,142 +107,7 @@ class _patientState extends State<patient> {
                                   child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
                             ),
                           ]),
-                      DataRow(
-                          selected: 1 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 1;
 
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
-                          ]),
-                      DataRow(
-                          selected: 2 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 2;
-
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
-                          ]),
-                      DataRow(
-                          selected: 0 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 0;
-
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
-                          ]),
-                      DataRow(
-                          selected: 0 == selectedIndex,
-                          onSelectChanged: (val) {
-                            setState(() {
-                              selectedIndex = 0;
-
-                            });
-                          },
-                          cells: [
-                            DataCell(
-                              CircleAvatar(
-                                backgroundImage: AssetImage('image/doc.png'),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  color = Colors.lightBlueAccent;
-                                });
-                              },
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ),
-                            DataCell(
-                              GestureDetector(
-                                  onTap: (){},
-                                  child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                            ),
-                          ]),
 
 
                     ],
@@ -316,6 +188,12 @@ class _patientState extends State<patient> {
                                       child: Text(value),
                                     );
                                   }).toList(),
+onSaved: (S){
+
+   setState(() {
+     blod=S;
+   });
+},
                                 ),
                               ),
                               SizedBox(
@@ -355,7 +233,11 @@ class _patientState extends State<patient> {
                               button(
                                   text: 'Apply',
                                   color: Colors.blue.shade800,
-                                  function: (){
+                                  function: ()async{
+                                    print(blod);
+                                    http.Response response=await http.post(Uri.parse(ur),headers: {"Content-type": "application/json"},
+                                        body: jsonEncode({"_id":mailcontroll.text,"password":pass.text,"fullName":namecontroll.text,"bloodType":"A+","height":175,"weight":60,"phone":"01031782430","birthDate":"1999-03-29T11:34:00.000Z","gender":"Male","address":"Mansoura,Dkahlia","donate":true,"__v":0}));
+print(response.body);
                                     Navigator.pop(context);
                                   })
                             ],

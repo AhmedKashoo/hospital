@@ -2,21 +2,34 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital/Network/dio/repo.dart';
+import 'package:hospital/Network/dio/web.dart';
 import 'package:hospital/components/my_flutter_app_icons.dart';
 import 'package:hospital/patient/chat2_patient.dart';
 import 'package:hospital/patient/chat_patient.dart';
 import 'package:hospital/patient/patient%20med.dart';
 
+import '../constant.dart';
 import '../login.dart';
+import 'pModel.dart';
 
 class Patient_home extends StatefulWidget {
-  const Patient_home({Key? key}) : super(key: key);
+
+  const Patient_home( {Key? key}) : super(key: key);
+
 
   @override
   State<Patient_home> createState() => _Patient_homeState();
 }
 
 class _Patient_homeState extends State<Patient_home> {
+
+   String ?name;
+   String? blod;
+   int? weight ;
+   int ?height;
+   String ?date;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +96,13 @@ class _Patient_homeState extends State<Patient_home> {
             ),
             SizedBox(height: 15,),
             GestureDetector(
-              onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));},
+              onTap: () {
+                ////////////////
+
+    getallpat1();
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));
+
+              },
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -248,4 +267,28 @@ class _Patient_homeState extends State<Patient_home> {
 
     );
   }
+
+  List<plog>?pat=[];
+  late repo r=api();
+  get all{
+    return pat;
+
+  }
+  Future<void>getallpat1()async {
+    List?list1 = await r.getAll();
+    pat!.addAll(list1!.map((e) => plog.fromJson(e)).toList());
+    print(pat);
+    for (int i = 0; i < pat!.length; i++) {
+      if (pat![i].sId==id ) {
+print(pat![i].fullName);
+        blod= pat![i].bloodType!;
+        name= pat![i].fullName!;
+        height= pat![i].height!;
+        weight= pat![i].weight!;
+        date= pat![i].birthDate!;
+      }
+      print(pat![i].sId);
+    }
+  }
+
 }
