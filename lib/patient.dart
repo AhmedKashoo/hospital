@@ -40,7 +40,7 @@ class _patientState extends State<patient> {
   void initState() {
 
     super.initState();
-    getallpat() ;
+    getallpat2() ;
   }
 
   bool isvisible = true;
@@ -51,7 +51,7 @@ class _patientState extends State<patient> {
   Widget build(BuildContext context) {
 
 
-    return FutureBuilder(future: getallpat() ,
+    return FutureBuilder(future: getallpat2() ,
         builder: (context,dynamic)=>
         Scaffold(
         key: scaffoldkey,
@@ -67,69 +67,35 @@ class _patientState extends State<patient> {
           alignment: Alignment.bottomCenter,
           children: [
 
-            Center(
-              child: Column(
-                children: <Widget>[
-                  SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      headingRowColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue.shade800),
-                      onSelectAll: (val) {
-                        setState(() {
-                          selectedIndex = -1;
-                        });
-                      },
-                      columns: [
-                        DataColumn(label: Text('Photo',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                        DataColumn(label: Text('Name',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                        DataColumn(label: Text('Email',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                        DataColumn(label: Text('Age',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                        DataColumn(label: Text('Add Medical Record',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-
-                      ],
-                      rows: [
-                        DataRow(
-                            selected: 0 == selectedIndex,
-                            onSelectChanged: (val) {
-                              setState(() {
-                                selectedIndex = 0;
-
-                              });
-                            },
-                            cells: [
-
-                              DataCell(
-                                CircleAvatar(
-                                  backgroundImage: AssetImage('image/doc.png'),
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    color = Colors.lightBlueAccent;
-                                  });
-                                },
-                              ),
-                              DataCell(
-                                Center(child: Text('Patient Name',style: TextStyle(fontWeight: FontWeight.bold),)),
-                              ),
-                              DataCell(
-                                Center(child: Text('Patient@gmail.com',style: TextStyle(fontWeight: FontWeight.bold),)),
-                              ),
-                              DataCell(
-                                Center(child: Text('44',style: TextStyle(fontWeight: FontWeight.bold),)),
-                              ),
-                              DataCell(
-                                GestureDetector(
-                                    onTap: (){},
-                                    child: Center(child:  Image(image: AssetImage('image/patient.png',),height: 40,width: 40,))),
-                              ),
-                            ]),
-
-                      ],
+            SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(columnSpacing: 38.0, columns: [
+                            DataColumn(label: Text('Name')),
+                            DataColumn(label: Text('password')),
+                            DataColumn(label: Text('Id')),
+                          ], rows: pat!.map((e) => DataRow(
+                              selected: true,
+                              onSelectChanged: (value) {},
+                              cells: [
+                                DataCell(Container(child:
+                                Text(e.fullName.toString()),)),
+                                DataCell(Container(child:
+                                Text(e.password.toString()),)),
+                                DataCell(Container(child:
+                                Text(e.sId.toString()),)),
+                              ]
+                          )).toList()
+                          )
                     ),
-                  ),
-                ],
+                    )]
+                ),
               ),
             ),
             Padding(
@@ -281,7 +247,7 @@ print(response.body);
     return pat;
 
   }
-  Future<void>getallpat()async {
+  Future<void>getallpat2()async {
     List?list1 = await r.getAll(patient_url);
     pat!.addAll(list1!.map((e) => plog.fromJson(e)).toList());
     print(pat);
