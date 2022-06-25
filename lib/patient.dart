@@ -44,7 +44,7 @@ class _patientState extends State<patient> {
   void initState() {
 
     super.initState();
-    getallpat2() ;
+
   }
   bool isvisible = true;
   Color c = const Color.fromARGB(232,234,245,245);
@@ -78,7 +78,9 @@ class _patientState extends State<patient> {
                             scrollDirection: Axis.horizontal,
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                child: DataTable(columnSpacing: 38.0, columns: [
+                                child: DataTable(headingRowColor:
+                                MaterialStateColor.resolveWith((states) => Colors.blue.shade800),
+                                    columns: [
                                   DataColumn(label: Text('Name')),
                                   DataColumn(label: Text('password')),
                                   DataColumn(label: Text('Id')),
@@ -101,7 +103,7 @@ class _patientState extends State<patient> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all( 8.0),
                   child: button(
                     text: 'Add Patient',
                     function: (){
