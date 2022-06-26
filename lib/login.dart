@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                           isupper: true,
                             text: 'Sign in',
                             function: (){
-                              getallnur();
+                              getallHos();
                             }
                         )
                       ],

@@ -1,17 +1,23 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital/patient/pModel.dart';
 import 'package:image_picker/image_picker.dart';
+import 'Network/dio/repo.dart';
+import 'Network/dio/web.dart';
 import 'components/components.dart';
+import 'medModel.dart';
 
 class patient_profile extends StatefulWidget {
   const patient_profile({Key? key}) : super(key: key);
 
   @override
   State<patient_profile> createState() => _patient_profileState();
+
 }
 
 class _patient_profileState extends State<patient_profile> {
+
   Future<void> take()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.camera);
   }
@@ -28,7 +34,12 @@ class _patient_profileState extends State<patient_profile> {
 
 
   Color c = const Color.fromARGB(232, 234, 245, 245);
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getallpat2();
+  }
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -222,5 +233,18 @@ class _patient_profileState extends State<patient_profile> {
         ),
       );
     }
+  List<Medical>?rec=[];
+  late repo r=api();
+  get all{
+    return rec;
+
+  }
+  Future<void>getallpat2()async {
+    List?list1 = await r.getAll("https://stark-lake-52973.herokuapp.com/medicalrecord/");
+    rec!.addAll(list1!.map((e) => Medical.fromJson(e)).toList());
+    print(rec![0].medicalRecord![0].doctorID);
+
+  }
+
   }
 
