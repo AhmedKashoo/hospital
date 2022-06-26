@@ -22,14 +22,15 @@ class Doc_home extends StatefulWidget {
 class _Doc_homeState extends State<Doc_home> {
   String ? name;
   List<dynamic>? patient_id=[];
-
-  int ?c;
+String?k;
 
   @override
   void initState() {
+
     super.initState();
     getalldoc2();
     getalldoc1();
+
   }
 
   @override
@@ -81,9 +82,12 @@ class _Doc_homeState extends State<Doc_home> {
 
                       ListView.separated(
 
+
                           shrinkWrap: true,
 
                           itemBuilder: (BuildContext context,index){
+
+
                         return GestureDetector(
                           onTap: () {},
                           child: Container(
@@ -148,6 +152,7 @@ class _Doc_homeState extends State<Doc_home> {
   }
 
   List<Shu>?doc1 = [];
+
   List<Dlog>?doc = [];
 
   late repo r = api();
@@ -159,6 +164,7 @@ class _Doc_homeState extends State<Doc_home> {
   get all1 {
     return doc1;
   }
+
 
   Future<void> getalldoc1() async {
     List?list3 = await r.getAll(Doctor_url);
@@ -174,16 +180,18 @@ class _Doc_homeState extends State<Doc_home> {
   }
 
   Future<void> getalldoc2() async {
-    List?list3 = await r.getAll('https://stark-lake-52973.herokuapp.com/dpatient/schedule/{$id}');
+    List?list3 = await r.getAll('https://stark-lake-52973.herokuapp.com/dpatient/schedule/'+id.toString());
     doc1!.addAll(list3!.map((e) => Shu.fromJson(e)).toList());
 
     for(int i=0;i<doc1!.length;i++){
 
       patient_id!.add(doc1![i].patientID.toString());
     }
-print(patient_id);
+print(id);
 
   }
+
+
 
 
 

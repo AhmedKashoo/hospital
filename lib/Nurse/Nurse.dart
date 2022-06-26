@@ -269,7 +269,7 @@ class _NurseState extends State<Nurse> {
         name=nur![i].fullName;
 
       }
-      print(nur![i].sId);
+      print(nur![i].fullName);
     }
   }
 }

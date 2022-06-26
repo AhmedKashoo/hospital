@@ -37,7 +37,7 @@ class _sState extends State<s> {
 
 
   Widget showProduct () {
-    if (details == 1 && evaluation == 0&&x==0) {
+    if (details == 0 && evaluation == 0&&x==0) {
       details = 0;
       return FixedTimeline.tileBuilder(
         mainAxisSize: MainAxisSize.max,
@@ -181,7 +181,7 @@ class _sState extends State<s> {
   void initState() {
 
     super.initState();
-    getallpat1() ;
+
   }
 
   @override
@@ -541,7 +541,6 @@ class _sState extends State<s> {
   Future<void>getallpat1()async {
     List?list1 = await r.getAll(patient_url);
     pat!.addAll(list1!.map((e) => plog.fromJson(e)).toList());
-    print(pat);
     for (int i = 0; i < pat!.length; i++) {
       if (pat![i].sId==id ) {
         print(pat![i].fullName);
@@ -551,7 +550,6 @@ class _sState extends State<s> {
         weight= pat![i].weight!;
         date= pat![i].birthDate!;
       }
-      print(pat![i].sId);
     }
   }
 
