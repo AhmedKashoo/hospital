@@ -34,7 +34,7 @@ class _doctorState extends State<nursing> {
   var address = TextEditingController();
   String ?dropdownValue = null;
   String ?gender = null;
-
+  var docid;
   bool isvisible = true;
   Color c = const Color.fromARGB(232,234,245,245);
   late Color color;
@@ -103,6 +103,8 @@ class _doctorState extends State<nursing> {
                                         DataCell(
                                           GestureDetector(
                                               onTap: (){
+                                                docid=e.sId;
+                                                print(docid);
                                                 Dialog errorDialog = Dialog(
                                                   elevation: 3,
                                                   shape: RoundedRectangleBorder(
@@ -172,8 +174,24 @@ class _doctorState extends State<nursing> {
                                                               ),
                                                               SizedBox(height: 20,),
                                                               Padding(padding: EdgeInsets.only(top: 10.0)),
-                                                              TextButton(onPressed: () {
-                                                                Navigator.of(context).pop();
+                                                              TextButton(onPressed: ()
+                                                                async {
+
+
+                                                                  http.Response response=await http.post(Uri.parse(NShu_ul),headers: {"Content-type": "application/json"},
+                                                                      body: jsonEncode(
+                                                                          {
+
+                                                                            "note": "ba7r",
+                                                                            "nurseID":docid.toString(),
+                                                                            "patientID": searchcontroll.text
+                                                                          }
+
+                                                                      ));
+                                                                  print(response.body);
+
+                                                                  Navigator.of(context).pop();
+
                                                               },
                                                                   child: Text('Done', style: TextStyle(color: Colors.blue, fontSize: 18.0),))
                                                             ],
@@ -367,7 +385,7 @@ class _doctorState extends State<nursing> {
                                           color: Colors.blue.shade800,
                                           function: ()async{
                                             http.Response response=await http.post(Uri.parse(Nurse_url),headers: {"Content-type": "application/json"},
-                                                body: jsonEncode({"_id":idcontroll.text,"password":pass.text,"fullName":pass.text,"phone":phone.text,"birthDate":datecontroll.text,"gender":gender.toString(),"address":address.text,"department":dropdownValue.toString(),"hospitalID":id.toString(),"__v":0}));
+                                                body: jsonEncode({"_id":idcontroll.text,"password":pass.text,"fullName":namecontroll.text,"phone":phone.text,"birthDate":datecontroll.text,"gender":gender.toString(),"address":address.text,"department":dropdownValue.toString(),"hospitalID":id.toString(),"__v":0}));
                                             print(response.body);
                                             Navigator.pop(context);
                                           })
@@ -396,6 +414,7 @@ class _doctorState extends State<nursing> {
   }
   Future<void>getallnur1()async {
     List?list3 = await r.getAll(Nurse_url);
+
     nur2!.addAll(list3!.map((e) => Nlog.fromJson(e)).toList());
     print(nur2);
   }

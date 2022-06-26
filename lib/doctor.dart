@@ -12,6 +12,7 @@ import 'Network/dio/web.dart';
 import 'constant.dart';
 
 class doctor extends StatefulWidget {
+
   const doctor({Key? key}) : super(key: key);
 
   @override
@@ -19,6 +20,7 @@ class doctor extends StatefulWidget {
 }
 
 class _doctorState extends State<doctor> {
+var docid;
   bool floatbot = false;
   var scaffoldkey = GlobalKey<ScaffoldState>();
   var formkey = GlobalKey<FormState>();
@@ -34,13 +36,17 @@ class _doctorState extends State<doctor> {
   var address = TextEditingController();
   String ?dropdownValue = null;
   String ?gender = null;
+  List<Map<String,dynamic>>listitem=<Map<String,dynamic>>[];
+
 
   bool isvisible = true;
   Color c = const Color.fromARGB(232,234,245,245);
   late Color color;
   int selectedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
+
 
     return FutureBuilder(future: getalldoc1() ,
 
@@ -82,14 +88,17 @@ class _doctorState extends State<doctor> {
                         DataColumn(label: Text('Doctor Schedule',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
 
                       ], rows: doc2!.map((e) => DataRow(
-                          selected: true,
-                          onSelectChanged: (value) {},
+                          selected: false,
+                          onSelectChanged: (value) {
+
+                          },
                           cells: [
                             DataCell(
                               CircleAvatar(
                                 backgroundImage: AssetImage('image/doc.png'),
                               ),
                               onTap: () {
+
                                 setState(() {
                                   color = Colors.lightBlueAccent;
                                 });
@@ -106,6 +115,8 @@ class _doctorState extends State<doctor> {
                             DataCell(
                               GestureDetector(
                                   onTap: (){
+                                docid=e.sId;
+                                print(docid.toString());
                                     Dialog errorDialog = Dialog(
                                       elevation: 3,
                                       shape: RoundedRectangleBorder(
@@ -169,13 +180,27 @@ class _doctorState extends State<doctor> {
                                                     child: form(
                                                         controlled_text: searchcontroll,
                                                         text:'Add Patient' ,
-                                                        input_type:TextInputType.number,
+                                                        input_type:TextInputType.emailAddress,
                                                         prefix_icon: Icons.person_add
                                                     ),
                                                   ),
                                                   SizedBox(height: 20,),
                                                   Padding(padding: EdgeInsets.only(top: 10.0)),
-                                                  TextButton(onPressed: () {
+                                                  TextButton(onPressed: ()async {
+
+
+    http.Response response=await http.post(Uri.parse(Shu_url),headers: {"Content-type": "application/json"},
+                                                        body: jsonEncode(
+                                                         {
+
+                                                           "note": "ba7r",
+                                                           "doctorID":docid.toString(),
+                                                           "patientID": searchcontroll.text
+                                                         }
+
+                                                        ));
+                                                    print(response.body);
+
                                                     Navigator.of(context).pop();
                                                   },
                                                       child: Text('Done', style: TextStyle(color: Colors.blue, fontSize: 18.0),))
@@ -398,8 +423,9 @@ class _doctorState extends State<doctor> {
 
   }
   Future<void>getalldoc1()async {
-    List?list3 = await r.getAll(Doctor_url);
+    List?list3 = await r.getAll(Shu_url);
     doc2!.addAll(list3!.map((e) => Dlog.fromJson(e)).toList());
     print(doc2);
   }
+
 }

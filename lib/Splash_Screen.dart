@@ -10,6 +10,7 @@ class Splash_Screen extends StatefulWidget {
 
   @override
   _Splash_ScreenState createState() => _Splash_ScreenState();
+
 }
 //wwwwwwwd
 class _Splash_ScreenState extends State<Splash_Screen> {
