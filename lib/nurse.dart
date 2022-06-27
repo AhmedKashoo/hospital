@@ -51,7 +51,7 @@ class _doctorState extends State<nursing> {
               appBar: AppBar(
                 title: Padding(
                   padding: const EdgeInsets.only(right: 50.0),
-                  child: Center(child: Text('Doctor List',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
+                  child: Center(child: Text('Nurse List',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
                 ),
                 backgroundColor: Colors.blue.shade800,
               ),
@@ -78,7 +78,7 @@ class _doctorState extends State<nursing> {
                                     DataColumn(label: Text('Name',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                                     DataColumn(label: Text('Email',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                                     DataColumn(label: Text('Age',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                                    DataColumn(label: Text('Doctor Schedule',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                                    DataColumn(label: Text('Nurse Schedule',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
 
                                   ], rows: nur2!.map((e) => DataRow(
                                       selected: true,
@@ -218,7 +218,7 @@ class _doctorState extends State<nursing> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: button(
-                      text: 'Add Doctor',
+                      text: 'Add Nurse',
                       function: (){
                         scaffoldkey.currentState
                             ?.showBottomSheet(
@@ -267,7 +267,7 @@ class _doctorState extends State<nursing> {
 
                                         ),
                                         child: DropdownButtonFormField<String>(
-                                          hint: Text('Doctor\'s specialty'),
+                                          hint: Text('Nurse\'s specialty'),
                                           value: dropdownValue,
                                           decoration: InputDecoration(
                                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),

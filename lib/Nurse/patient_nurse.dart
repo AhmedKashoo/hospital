@@ -1,52 +1,32 @@
-import 'dart:convert';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/Network/dio/repo.dart';
 import 'package:hospital/Network/dio/web.dart';
-import 'package:hospital/components/components.dart';
 import 'package:hospital/constant.dart';
 import 'package:hospital/patient/home.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:timelines/timelines.dart';
 
 import '../findModel.dart';
 import '../medModel.dart';
-import 'doctor_home.dart';
-import 'package:http/http.dart'as http;
 
-
-class Doctor_patient extends StatefulWidget {
+class Nurse_pat extends StatefulWidget {
 
 
 
 
   @override
-  State<Doctor_patient> createState() => _Doctor_patientState();
+  State<Nurse_pat> createState() => _Nurse_patState();
 }
 
-class _Doctor_patientState extends State<Doctor_patient> {
-  Future<void> take()async{
-    final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.camera);
-  }
-  Future<void> takeG()async{
-    final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.gallery);
-  }
-  Future<void>d()async{
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-  }
-  var scaffoldkey = GlobalKey<ScaffoldState>();
-  var formkey = GlobalKey<FormState>();
-  var notecontroll = TextEditingController();
+class _Nurse_patState extends State<Nurse_pat> {
   int ? len;
   String ?name;
   String? blod;
   int? weight ;
-  Color c = const Color.fromARGB(232, 234, 245, 245);
   int ?height;
   String ?date;
+
+
   int details = 0;
   int evaluation = 0;
   int x=0;
@@ -97,7 +77,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Image.network( med![index].medicalPic.toString()),
+                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
                               SizedBox(width: 3,),
                               Image.asset("image/xray.jpg",width: 30,height: 30,) ,
                               SizedBox(width: 3,),
@@ -212,112 +192,18 @@ class _Doctor_patientState extends State<Doctor_patient> {
     return FutureBuilder(
         future: getallpat1() ,
         builder: (context,dynamic)=> Scaffold(
-          key: scaffoldkey,
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
             leading:IconButton(color: Colors.blue,
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Doc_home()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Patient_home()));
               },
               icon: Icon(Icons.arrow_back),),
             title: Padding(
               padding: const EdgeInsets.only(right: 50.0),
               child: Center(child: Text("My Profile",style: TextStyle(color: Colors.blue),)),
             ),
-            actions: [
-              IconButton(color: Colors.blue,
-                onPressed: (){
-                  scaffoldkey.currentState
-                      ?.showBottomSheet(
-                          (context) =>
-                          Form(
-                            key: formkey,
-                            child: StatefulBuilder(
-                              builder: (BuildContext context,
-                                  StateSetter setbotstate) =>
-                                  Container(
-                                    color: c,
-                                    padding: EdgeInsets.all(20),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        form(
-                                            controlled_text: notecontroll,
-                                            text: 'Add Note',
-                                            prefix_icon: Icons
-                                                .system_update_alt_rounded,
-                                            input_type: TextInputType.text),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Center(child: Text('Add File',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
-                                        Center(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Center(child: IconButton(onPressed: (){take();}, icon:Icon(Icons.camera_alt),iconSize: 30,color: Colors.blue.shade900,)),
-                                              Container(height: 20,width: 2,color: Colors.black,),
-                                              Center(child: IconButton(onPressed: (){takeG();}, icon:Icon(Icons.camera),iconSize: 30,color: Colors.blue.shade900,)),
-                                              Container(height: 20,width: 2,color: Colors.black,),
-                                              Center(child: IconButton(onPressed: (){d();}, icon:Icon(Icons.file_copy),iconSize: 30,color: Colors.blue.shade900,)),
-
-
-                                            ],
-                                          ),
-                                        ),
-
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-
-                                        button(
-                                            text: 'Apply',
-                                            color: Colors.blue.shade800,
-                                            function: ()async {
-                                              http.Response response=await http.post(Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/"),headers: {"Content-type": "application/json"},
-                                                  body: jsonEncode(
-                                                    {
-                                                      "_id": "62b783753420c7f36d789ac9",
-                                                      "day": "2022-07-02T00:00:00.000Z",
-                                                      "examination": false,
-                                                      "prescription": "pandolExtra",
-                                                      "dose": 2,
-                                                      "period": "breakfast,dinner",
-                                                      "nextAppointment": "2022-07-06T00:00:00.000Z",
-                                                      "note": notecontroll.text,
-                                                      "doctorID": "d33956741876655",
-                                                      "patientID": pid.toString(),
-                                                      "expired": false,
-                                                      "__v": 0
-                                                    },
-
-                                                  ));
-                                              print(response.body);
-                                              Navigator.pop(context);
-                                            }
-                                            )
-                                      ],
-                                    ),
-                                  ),
-                            ),
-                          ),
-                      elevation: 15
-                  );
-                },
-                icon: Icon(Icons.medical_services_sharp),),
-
-            ],
           ),
           body:ListView(
 

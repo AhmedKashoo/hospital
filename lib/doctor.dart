@@ -137,7 +137,7 @@ var docid;
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: <Widget>[
-                                                  Text('Nurse Schedule',style: TextStyle(
+                                                  Text('Doctor Schedule',style: TextStyle(
                                                       color: Colors.blue,
                                                       fontSize: 20,
                                                       fontWeight: FontWeight.bold

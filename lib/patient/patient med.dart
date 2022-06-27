@@ -6,6 +6,8 @@ import 'package:hospital/constant.dart';
 import 'package:hospital/patient/home.dart';
 import 'package:timelines/timelines.dart';
 
+import '../findModel.dart';
+import '../medModel.dart';
 import 'pModel.dart';
 
 class s extends StatefulWidget {
@@ -18,7 +20,7 @@ class s extends StatefulWidget {
 }
 
 class _sState extends State<s> {
-
+int ? len;
   String ?name;
   String? blod;
   int? weight ;
@@ -36,7 +38,7 @@ class _sState extends State<s> {
   ];
 
 
-  Widget showProduct () {
+  Widget showMedicl () {
     if (details == 0 && evaluation == 0&&x==0) {
       details = 0;
       return FixedTimeline.tileBuilder(
@@ -47,48 +49,46 @@ class _sState extends State<s> {
           contentsAlign: ContentsAlign.alternating,
           oppositeContentsBuilder: (context, index) => Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('10:00 AM',style: TextStyle(color:Colors.cyanAccent.shade400,),),
+            child: Text(med![index].day.toString(),style: TextStyle(color:Colors.cyanAccent.shade400,),),
           ),
-          contentsBuilder: (context, index) => Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Card(
+          contentsBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Card(
 
 
 
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
 
 
-                        children: [
-                          Text("Heart Check",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
-                          SizedBox(height: 3,),
-                          Text('this is describtion heart ',style: TextStyle(color: Colors.black26,),),
-                          SizedBox(height: 3,),
-                          Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
-                          SizedBox(height: 3,),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
+                      children: [
+                        Text(med![index].note.toString(),style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
+                        SizedBox(height: 3,),
+                        Text( med![index].period.toString(),style: TextStyle(color: Colors.black26,),),
+                        SizedBox(height: 3,),
+                        Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
+                        SizedBox(height: 3,),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
 
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset("image/xray.jpg",width: 40,height: 40,) ,
-                                SizedBox(width: 3,),
-                                Image.asset("image/xray.jpg",width: 30,height: 30,) ,
-                                SizedBox(width: 3,),
-                                Image.asset("image/xray.jpg",width: 40,height: 40,) ,
-                                SizedBox(width: 3,),
-                              ],
-                            ),
-                          )
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
+                              SizedBox(width: 3,),
+                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
+                              SizedBox(width: 3,),
+                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
+                              SizedBox(width: 3,),
+                            ],
+                          ),
+                        )
 
-                        ],
-                      ),
+                      ],
                     ),
                   ),
                 ),
@@ -98,7 +98,7 @@ class _sState extends State<s> {
           connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
           indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
           itemExtent: 180.0,
-          itemCount: 3,
+          itemCount:len!.toInt(),
         ),
       );
     }
@@ -175,12 +175,14 @@ class _sState extends State<s> {
           child: Text('History',style: TextStyle(color: Colors.white),)
       );
     }
-    return Container();
+    return SingleChildScrollView(child: Container());
   }
   @override
   void initState() {
 
     super.initState();
+    getallmed();
+
 
   }
 
@@ -502,7 +504,7 @@ class _sState extends State<s> {
 
                           ],
                         ),
-                        showProduct()
+                        showMedicl()
 
 
                       ],)
@@ -532,15 +534,20 @@ class _sState extends State<s> {
       )
     );
   }
-  List<plog>?pat=[];
+  List<Medical>?pat=[];
   late repo r=api();
   get all{
     return pat;
 
   }
+List<FindMedic>?med=[];
+get allmed{
+  return med;
+
+}
   Future<void>getallpat1()async {
-    List?list1 = await r.getAll(patient_url);
-    pat!.addAll(list1!.map((e) => plog.fromJson(e)).toList());
+    List?list1 = await r.getAll("https://stark-lake-52973.herokuapp.com/medicalrecord/");
+    pat!.addAll(list1!.map((e) => Medical.fromJson(e)).toList());
     for (int i = 0; i < pat!.length; i++) {
       if (pat![i].sId==id ) {
         print(pat![i].fullName);
@@ -549,9 +556,19 @@ class _sState extends State<s> {
         height= pat![i].height!;
         weight= pat![i].weight!;
         date= pat![i].birthDate!;
+
       }
     }
+
+
   }
+Future<void>getallmed()async {
+  List?list1 = await r.getAll("https://stark-lake-52973.herokuapp.com/medicalrecord/"+id.toString());
+  med!.addAll(list1!.map((e) => FindMedic.fromJson(e)).toList());
+
+  print(med!.length);
+len=med!.length;
+}
 
 
 

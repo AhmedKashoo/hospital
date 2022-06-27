@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ String?k;
 
   @override
   Widget build(BuildContext context) {
+
     var now = DateTime.now();
     return FutureBuilder(
         future: getalldoc2(),
@@ -89,7 +91,11 @@ String?k;
 
 
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            pid=doc1![index].patientID.toString();
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Doctor_patient()));
+                            print(pid);
+                          },
                           child: Container(
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
