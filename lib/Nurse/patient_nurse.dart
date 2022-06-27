@@ -38,7 +38,7 @@ class _Nurse_patState extends State<Nurse_pat> {
 
 
   Widget showMedicl () {
-    if (details == 0 && evaluation == 0&&x==0) {
+    if (details == 0 ) {
       details = 0;
       return FixedTimeline.tileBuilder(
         mainAxisSize: MainAxisSize.max,
@@ -101,7 +101,7 @@ class _Nurse_patState extends State<Nurse_pat> {
         ),
       );
     }
-    else if (evaluation == 1 && details == 0&&x==0) {
+    else if ( details == 1) {
       evaluation = 0;
       return Container (
           child: FixedTimeline.tileBuilder(
@@ -119,22 +119,17 @@ class _Nurse_patState extends State<Nurse_pat> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Card(
-
-
-
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-
-
                             children: [
-                              Text("Heart Check",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
+                              Text(med![index].prescription.toString(),style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
                               SizedBox(height: 3,),
-                              Text('this is describtion heart ',style: TextStyle(color: Colors.black26,),),
+                              Text(med![index].period.toString(),style: TextStyle(color: Colors.black26,),),
                               SizedBox(height: 3,),
-                              Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
+                              Text(med![index].dose.toString(),style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
                               SizedBox(height: 3,),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -166,12 +161,6 @@ class _Nurse_patState extends State<Nurse_pat> {
               itemCount: 3,
             ),
           )
-      );
-    }
-    else if (evaluation == 0 && details == 0&&x==1) {
-      evaluation = 0;
-      return Container (
-          child: Text('History',style: TextStyle(color: Colors.white),)
       );
     }
     return SingleChildScrollView(child: Container());
@@ -430,8 +419,7 @@ class _Nurse_patState extends State<Nurse_pat> {
                                 child: GestureDetector(
                                   onTap: () {
                                     setState((){
-                                      evaluation = 0;
-                                      x=0;
+
                                       details =1;
                                     });
                                   },
@@ -445,7 +433,7 @@ class _Nurse_patState extends State<Nurse_pat> {
                                         color: Colors.blue.shade700,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: Center(child: Text("History",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                                      child: Center(child: Text("medicine",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                                     ),
                                   ),
                                 ),
@@ -456,8 +444,7 @@ class _Nurse_patState extends State<Nurse_pat> {
                                   onTap: () {
                                     setState(() {
                                       details = 0;
-                                      evaluation = 1;
-                                      x=0;
+
                                     });
                                   },
                                   child: Padding(
@@ -475,30 +462,7 @@ class _Nurse_patState extends State<Nurse_pat> {
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      details = 0;
-                                      evaluation = 0;
-                                      x=1;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                      height: 35,
-                                      width: 35,
 
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue.shade700,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child:Center(child: Text("Medicine",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                                    ),
-                                  ),
-                                ),
-                              ),
 
 
                             ],

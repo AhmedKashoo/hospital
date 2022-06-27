@@ -46,87 +46,89 @@ class _NurseState extends State<Nurse> {
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage('image/doc.png'),
-                  radius: 35,
-                ),
-                SizedBox(height: 10,),
-                Text('Good Morning,',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 34),),
-                Text('Rn.$name',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 34),),
-                SizedBox(height: 15,),
-                Text('You have the following upcoming patients today',style: TextStyle(fontSize: 20),),
-                SizedBox(height: 20,),
-                ListView.separated(
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('image/doc.png'),
+                    radius: 35,
+                  ),
+                  SizedBox(height: 10,),
+                  Text('Good Morning,',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 34),),
+                  Text('Rn.$name',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 34),),
+                  SizedBox(height: 15,),
+                  Text('You have the following upcoming patients today',style: TextStyle(fontSize: 20),),
+                  SizedBox(height: 20,),
+                  ListView.separated(
+                    physics: const ScrollPhysics(),
+
+                      shrinkWrap: true,
+
+                      itemBuilder: (BuildContext context,index){
 
 
-                    shrinkWrap: true,
-
-                    itemBuilder: (BuildContext context,index){
-
-
-                      return GestureDetector(
-                        onTap: () {
-                          pid=nur1![index].patientID.toString();
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Nurse_pat()));
-                          print(pid);
-                        },
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: CircleAvatar(
-                                    backgroundImage: AssetImage('image/doc.png'),
-                                    radius: 30,
+                        return GestureDetector(
+                          onTap: () {
+                            pid=nur1![index].patientID.toString();
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Nurse_pat()));
+                            print(pid);
+                          },
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5.0),
+                                    child: CircleAvatar(
+                                      backgroundImage: AssetImage('image/doc.png'),
+                                      radius: 30,
+                                    ),
                                   ),
-                                ),
 
-                                Text(nur1![index].patientID.toString(), style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Colors.blueAccent
-                                ),),
-
-                                Text('${now.hour}:${now.minute}',
-                                  style: TextStyle(
+                                  Text(nur1![index].patientID.toString(), style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 15,
+                                      fontSize: 20,
                                       color: Colors.blueAccent
                                   ),),
+
+                                  Text('${now.hour}:${now.minute}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: Colors.blueAccent
+                                    ),),
+                                ],
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 0.1,
+                                  spreadRadius: 0.0,
+                                  offset: Offset(
+                                      0.0, 1.0), // shadow direction: bottom right
+                                )
                               ],
                             ),
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 0.1,
-                                spreadRadius: 0.0,
-                                offset: Offset(
-                                    0.0, 1.0), // shadow direction: bottom right
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context,index){
-                      return SizedBox(height: 15,);
-                    },
-                    itemCount: nur1!.length
-                )
+                        );
+                      },
+                      separatorBuilder: (context,index){
+                        return SizedBox(height: 15,);
+                      },
+                      itemCount: nur1!.length
+                  ),
 
-              ],
+                ],
+              ),
             ),
           ),
         )

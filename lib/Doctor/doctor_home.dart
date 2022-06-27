@@ -83,6 +83,7 @@ String?k;
                       SizedBox(height: 20,),
 
                       ListView.separated(
+                        physics: const ScrollPhysics(),
 
 
                           shrinkWrap: true,

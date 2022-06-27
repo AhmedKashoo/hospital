@@ -9,6 +9,7 @@ import 'package:hospital/components/components.dart';
 import 'package:hospital/constant.dart';
 import 'package:hospital/patient/home.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:timelines/timelines.dart';
 
 import '../findModel.dart';
@@ -40,6 +41,10 @@ class _Doctor_patientState extends State<Doctor_patient> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   var formkey = GlobalKey<FormState>();
   var notecontroll = TextEditingController();
+  var datecontroll = TextEditingController();
+  var prescription = TextEditingController();
+  var dose = TextEditingController();
+  var period = TextEditingController();
   int ? len;
   String ?name;
   String? blod;
@@ -58,7 +63,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
 
 
   Widget showMedicl () {
-    if (details == 0 && evaluation == 0&&x==0) {
+    if (  details == 0 ) {
       details = 0;
       return FixedTimeline.tileBuilder(
         mainAxisSize: MainAxisSize.max,
@@ -121,7 +126,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
         ),
       );
     }
-    else if (evaluation == 1 && details == 0&&x==0) {
+    else if ( details == 1) {
       evaluation = 0;
       return Container (
           child: FixedTimeline.tileBuilder(
@@ -139,22 +144,17 @@ class _Doctor_patientState extends State<Doctor_patient> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Card(
-
-
-
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-
-
                             children: [
-                              Text("Heart Check",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
+                              Text(med![index].prescription.toString(),style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
                               SizedBox(height: 3,),
-                              Text('this is describtion heart ',style: TextStyle(color: Colors.black26,),),
+                              Text(med![index].period.toString(),style: TextStyle(color: Colors.black26,),),
                               SizedBox(height: 3,),
-                              Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
+                              Text(med![index].dose.toString(),style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
                               SizedBox(height: 3,),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -186,12 +186,6 @@ class _Doctor_patientState extends State<Doctor_patient> {
               itemCount: 3,
             ),
           )
-      );
-    }
-    else if (evaluation == 0 && details == 0&&x==1) {
-      evaluation = 0;
-      return Container (
-          child: Text('History',style: TextStyle(color: Colors.white),)
       );
     }
     return SingleChildScrollView(child: Container());
@@ -231,85 +225,136 @@ class _Doctor_patientState extends State<Doctor_patient> {
                   scaffoldkey.currentState
                       ?.showBottomSheet(
                           (context) =>
-                          Form(
-                            key: formkey,
-                            child: StatefulBuilder(
-                              builder: (BuildContext context,
-                                  StateSetter setbotstate) =>
-                                  Container(
-                                    color: c,
-                                    padding: EdgeInsets.all(20),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        form(
-                                            controlled_text: notecontroll,
-                                            text: 'Add Note',
-                                            prefix_icon: Icons
-                                                .system_update_alt_rounded,
-                                            input_type: TextInputType.text),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Center(child: Text('Add File',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
-                                        Center(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Center(child: IconButton(onPressed: (){take();}, icon:Icon(Icons.camera_alt),iconSize: 30,color: Colors.blue.shade900,)),
-                                              Container(height: 20,width: 2,color: Colors.black,),
-                                              Center(child: IconButton(onPressed: (){takeG();}, icon:Icon(Icons.camera),iconSize: 30,color: Colors.blue.shade900,)),
-                                              Container(height: 20,width: 2,color: Colors.black,),
-                                              Center(child: IconButton(onPressed: (){d();}, icon:Icon(Icons.file_copy),iconSize: 30,color: Colors.blue.shade900,)),
-
-
-                                            ],
+                          SingleChildScrollView(
+                            child: Form(
+                              key: formkey,
+                              child: StatefulBuilder(
+                                builder: (BuildContext context,
+                                    StateSetter setbotstate) =>
+                                    Container(
+                                      color: c,
+                                      padding: EdgeInsets.all(20),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          form(
+                                              controlled_text: notecontroll,
+                                              text: 'Add Note',
+                                              prefix_icon: Icons
+                                                  .system_update_alt_rounded,
+                                              input_type: TextInputType.text),
+                                          SizedBox(
+                                            height: 10,
                                           ),
-                                        ),
+                                          form(
+                                              controlled_text:prescription,
+                                              text: 'Add prescriptions',
+                                              prefix_icon: Icons
+                                                  .system_update_alt_rounded,
+                                              input_type: TextInputType.text),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          form(
+                                              controlled_text: period,
+                                              text: 'Add period',
+                                              prefix_icon: Icons
+                                                  .system_update_alt_rounded,
+                                              input_type: TextInputType.text),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          form(
+                                              controlled_text: dose,
+                                              text: 'Add dose',
+                                              prefix_icon: Icons
+                                                  .system_update_alt_rounded,
+                                              input_type: TextInputType.number),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          form(
+                                            controlled_text: datecontroll,
+                                            text: 'Next Appointment',
+                                            tap: () {
+                                              showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(1960,8),
+                                                  lastDate: DateTime.parse(
+                                                      '2022-11-20'))
+                                                  .then((value) {
+                                                datecontroll.text =
+                                                    DateFormat.yMMMd()
+                                                        .format(value!);
+                                              });
+                                            },
+                                            prefix_icon: Icons.calendar_today,
+                                            input_type: TextInputType.datetime,
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Center(child: Text('Add File',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                                          Center(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Center(child: IconButton(onPressed: (){take();}, icon:Icon(Icons.camera_alt),iconSize: 30,color: Colors.blue.shade900,)),
+                                                Container(height: 20,width: 2,color: Colors.black,),
+                                                Center(child: IconButton(onPressed: (){takeG();}, icon:Icon(Icons.camera),iconSize: 30,color: Colors.blue.shade900,)),
+                                                Container(height: 20,width: 2,color: Colors.black,),
+                                                Center(child: IconButton(onPressed: (){d();}, icon:Icon(Icons.file_copy),iconSize: 30,color: Colors.blue.shade900,)),
 
-                                        SizedBox(
-                                          height: 10,
-                                        ),
 
-                                        SizedBox(
-                                          height: 10,
-                                        ),
+                                              ],
+                                            ),
+                                          ),
 
-                                        SizedBox(
-                                          height: 10,
-                                        ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
 
-                                        button(
-                                            text: 'Apply',
-                                            color: Colors.blue.shade800,
-                                            function: ()async {
-                                              http.Response response=await http.post(Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/"),headers: {"Content-type": "application/json"},
-                                                  body: jsonEncode(
-                                                    {
-                                                      "_id": "62b783753420c7f36d789ac9",
-                                                      "day": "2022-07-02T00:00:00.000Z",
-                                                      "examination": false,
-                                                      "prescription": "pandolExtra",
-                                                      "dose": 2,
-                                                      "period": "breakfast,dinner",
-                                                      "nextAppointment": "2022-07-06T00:00:00.000Z",
-                                                      "note": notecontroll.text,
-                                                      "doctorID": "d33956741876655",
-                                                      "patientID": pid.toString(),
-                                                      "expired": false,
-                                                      "__v": 0
-                                                    },
+                                          SizedBox(
+                                            height: 10,
+                                          ),
 
-                                                  ));
-                                              print(response.body);
-                                              Navigator.pop(context);
-                                            }
-                                            )
-                                      ],
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+
+                                          button(
+                                              text: 'Apply',
+                                              color: Colors.blue.shade800,
+                                              function: ()async {
+                                                http.Response response=await http.post(Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/"),headers: {"Content-type": "application/json"},
+                                                    body: jsonEncode(
+                                                      {
+                                                        "_id": "62b783753420c7f36d789ac9",
+                                                        "day": "2022-07-02T00:00:00.000Z",
+                                                        "examination": false,
+                                                        "prescription": prescription.text,
+                                                        "dose": dose.text,
+                                                        "period": period.text,
+                                                        "nextAppointment": datecontroll.text,
+                                                        "note": notecontroll.text,
+                                                        "doctorID": id.toString(),
+                                                        "patientID": pid.toString(),
+                                                        "expired": false,
+                                                        "__v": 0
+                                                      },
+
+                                                    ));
+                                                print(response.body);
+                                                Navigator.pop(context);
+                                              }
+                                              )
+                                        ],
+                                      ),
                                     ),
-                                  ),
+                              ),
                             ),
                           ),
                       elevation: 15
@@ -544,8 +589,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                 child: GestureDetector(
                                   onTap: () {
                                     setState((){
-                                      evaluation = 0;
-                                      x=0;
+
                                       details =1;
                                     });
                                   },
@@ -559,7 +603,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                         color: Colors.blue.shade700,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: Center(child: Text("History",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                                      child: Center(child: Text("medicine",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                                     ),
                                   ),
                                 ),
@@ -570,8 +614,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                   onTap: () {
                                     setState(() {
                                       details = 0;
-                                      evaluation = 1;
-                                      x=0;
+
                                     });
                                   },
                                   child: Padding(
@@ -589,30 +632,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      details = 0;
-                                      evaluation = 0;
-                                      x=1;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                      height: 35,
-                                      width: 35,
 
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue.shade700,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child:Center(child: Text("Medicine",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                                    ),
-                                  ),
-                                ),
-                              ),
 
 
                             ],

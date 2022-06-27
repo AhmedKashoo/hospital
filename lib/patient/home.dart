@@ -10,6 +10,7 @@ import 'package:hospital/patient/chat_patient.dart';
 import 'package:hospital/patient/patient%20med.dart';
 
 import '../constant.dart';
+import '../findModel.dart';
 import '../login.dart';
 import 'pModel.dart';
 
@@ -23,12 +24,18 @@ class Patient_home extends StatefulWidget {
 }
 
 class _Patient_homeState extends State<Patient_home> {
-
+  int ? len;
    String ?name;
    String? blod;
    int? weight ;
    int ?height;
    String ?date;
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getallmed();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +105,11 @@ class _Patient_homeState extends State<Patient_home> {
             GestureDetector(
               onTap: () {
                 ////////////////
+                setState(() {
+                  getallpat1();
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));
 
-    getallpat1();
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));
-
+                });
               },
               child: Container(
                 child: Padding(
@@ -152,18 +160,22 @@ class _Patient_homeState extends State<Patient_home> {
             SizedBox(height: 25,),
             GestureDetector(
               onTap: (){
-                 showDialog(context: context, builder: (context){
-                  return AlertDialog(
-                    title: Text("Your next appointment on  ",
-                      style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
-                    content: Text("March 5th ",
-                      style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
-                    actions: [
-                      TextButton(onPressed: (){  Navigator.pop(context, 'Cancel');},
-                          child: Text('OK'))
-                    ],
-                  );
+                setState(() {
+                  getallmed();
+                  showDialog(context: context, builder: (context){
+                    return AlertDialog(
+                      title: Text("Your next appointment on  ",
+                        style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
+                      content: Text(med![med!.length-1.toInt()].nextAppointment.toString(),
+                        style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
+                      actions: [
+                        TextButton(onPressed: (){  Navigator.pop(context, 'Cancel');},
+                            child: Text('OK'))
+                      ],
+                    );
+                  });
                 });
+
               },
               child: Container(
                 child: Padding(
@@ -290,5 +302,19 @@ print(pat![i].fullName);
       print(pat![i].sId);
     }
   }
+   List<FindMedic>?med=[];
+   get allmed{
+     return med;
+
+   }
+   Future<void>getallmed()async {
+     List?list1 = await r.getAll("https://stark-lake-52973.herokuapp.com/medicalrecord/"+id.toString());
+     med!.addAll(list1!.map((e) => FindMedic.fromJson(e)).toList());
+
+     print(med!.length);
+     print(med![0].nextAppointment);
+
+     len=med!.length;
+   }
 
 }
