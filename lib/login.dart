@@ -127,7 +127,16 @@ class _LoginState extends State<Login> {
                           isupper: true,
                             text: 'Sign in',
                             function: (){
-                              getalldoc();
+                            String?user1=user.text.toString();
+                              if(user1[0]=="H"||user1[0]=="h"){
+                                getallHos();
+                              }else if(user1[0]=="D"||user1[0]=="d"){
+                                getalldoc();
+                              }else if(user1[0]=="P"||user1[0]=="p"){
+                                getallpat();
+                              }else if(user1[0]=="N"||user1[0]=="n"){
+                                getallnur();
+                              }
                             }
                         )
                       ],

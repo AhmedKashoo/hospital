@@ -103,13 +103,12 @@ class _Patient_homeState extends State<Patient_home> {
             ),
             SizedBox(height: 15,),
             GestureDetector(
-              onTap: () {
+              onTap: () async{
                 ////////////////
-                setState(() {
-                  getallpat1();
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));
 
-                });
+                  getallpat1();
+                 await Navigator.push(context, MaterialPageRoute(builder: (context)=>s()));
+
               },
               child: Container(
                 child: Padding(
@@ -161,12 +160,13 @@ class _Patient_homeState extends State<Patient_home> {
             GestureDetector(
               onTap: (){
                 setState(() {
+                  var date=DateTime.parse(med![med!.length-1.toInt()].nextAppointment.toString());
                   getallmed();
                   showDialog(context: context, builder: (context){
                     return AlertDialog(
                       title: Text("Your next appointment on  ",
                         style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
-                      content: Text(med![med!.length-1.toInt()].nextAppointment.toString(),
+                      content: Text(date.toLocal().toString(),
                         style: TextStyle(fontSize: 20,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
                       actions: [
                         TextButton(onPressed: (){  Navigator.pop(context, 'Cancel');},

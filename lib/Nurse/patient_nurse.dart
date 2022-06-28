@@ -467,6 +467,7 @@ class _Nurse_patState extends State<Nurse_pat> {
 
                             ],
                           ),
+                          med!.length==null?CircularProgressIndicator():
                           showMedicl()
 
 

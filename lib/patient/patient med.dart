@@ -98,7 +98,7 @@ int ? len;
           connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
           indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
           itemExtent: 180.0,
-          itemCount:len!.toInt(),
+          itemCount:med!.length,
         ),
       );
     }
@@ -159,7 +159,7 @@ int ? len;
               connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemExtent: 180.0,
-              itemCount: 3,
+              itemCount: med!.length,
             ),
           )
       );
@@ -170,6 +170,7 @@ int ? len;
   void initState() {
 
     super.initState();
+    getallpat1();
     getallmed();
 
 
@@ -468,7 +469,10 @@ int ? len;
 
                           ],
                         ),
-                        showMedicl()
+                        med?.length == null ? CircularProgressIndicator(): showMedicl()
+
+
+
 
 
                       ],)
@@ -531,7 +535,7 @@ Future<void>getallmed()async {
   med!.addAll(list1!.map((e) => FindMedic.fromJson(e)).toList());
 
   print(med!.length);
-len=med!.length;
+len=med?.length  ;
 }
 
 

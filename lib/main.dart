@@ -11,6 +11,8 @@ import 'package:hospital/patient/home.dart';
 import 'OnBordingScreen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

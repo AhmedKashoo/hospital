@@ -122,7 +122,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
           connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
           indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
           itemExtent: 180.0,
-          itemCount:len!.toInt(),
+          itemCount:med!.length,
         ),
       );
     }
@@ -183,7 +183,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
               connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemExtent: 180.0,
-              itemCount: 3,
+              itemCount:med!.length,
             ),
           )
       );
@@ -637,6 +637,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
 
                             ],
                           ),
+                          med!.length==null?CircularProgressIndicator():
                           showMedicl()
 
 
