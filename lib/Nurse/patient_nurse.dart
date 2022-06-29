@@ -38,7 +38,7 @@ class _Nurse_patState extends State<Nurse_pat> {
 
 
   Widget showMedicl () {
-    if (details == 0 ) {
+    if (  details == 0 ) {
       details = 0;
       return FixedTimeline.tileBuilder(
         mainAxisSize: MainAxisSize.max,
@@ -77,7 +77,7 @@ class _Nurse_patState extends State<Nurse_pat> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
+                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
                               SizedBox(width: 3,),
                               Image.asset("image/xray.jpg",width: 30,height: 30,) ,
                               SizedBox(width: 3,),
@@ -97,7 +97,7 @@ class _Nurse_patState extends State<Nurse_pat> {
           connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
           indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
           itemExtent: 180.0,
-          itemCount:len!.toInt(),
+          itemCount:med!.length,
         ),
       );
     }
@@ -158,7 +158,7 @@ class _Nurse_patState extends State<Nurse_pat> {
               connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemExtent: 180.0,
-              itemCount: 3,
+              itemCount:med!.length,
             ),
           )
       );
@@ -467,7 +467,7 @@ class _Nurse_patState extends State<Nurse_pat> {
 
                             ],
                           ),
-                          med!.length==null?CircularProgressIndicator():
+                          med!.length==null? CircularProgressIndicator() :
                           showMedicl()
 
 

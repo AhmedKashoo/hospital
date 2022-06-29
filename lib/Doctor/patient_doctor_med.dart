@@ -102,7 +102,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Image.network( med![index].medicalPic.toString()),
+                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
                               SizedBox(width: 3,),
                               Image.asset("image/xray.jpg",width: 30,height: 30,) ,
                               SizedBox(width: 3,),

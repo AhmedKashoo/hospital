@@ -11,7 +11,7 @@ class Medical {
   String? address;
   bool? donate;
   int? iV;
-  List<MedicalRecord>? medicalRecord;
+
 
   Medical(
       {this.sId,
@@ -26,7 +26,7 @@ class Medical {
         this.address,
         this.donate,
         this.iV,
-        this.medicalRecord});
+        });
 
   Medical.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -42,9 +42,9 @@ class Medical {
     donate = json['donate'];
     iV = json['__v'];
     if (json['medical_record'] != null) {
-      medicalRecord = <MedicalRecord>[];
+
       json['medical_record'].forEach((v) {
-        medicalRecord!.add(new MedicalRecord.fromJson(v));
+
       });
     }
   }
@@ -63,10 +63,7 @@ class Medical {
     data['address'] = this.address;
     data['donate'] = this.donate;
     data['__v'] = this.iV;
-    if (this.medicalRecord != null) {
-      data['medical_record'] =
-          this.medicalRecord!.map((v) => v.toJson()).toList();
-    }
+
     return data;
   }
 }

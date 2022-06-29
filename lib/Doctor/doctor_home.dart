@@ -93,6 +93,7 @@ String?k;
 
                         return GestureDetector(
                           onTap: () {
+                            print(pid);
                             pid=doc1![index].patientID.toString();
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Doctor_patient()));
                             print(pid);

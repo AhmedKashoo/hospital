@@ -11,7 +11,7 @@ class FindMedic {
   String? patientID;
   bool? expired;
   int? iV;
-  String?medicalPic;
+
 
   FindMedic(
       {this.sId,
@@ -26,7 +26,7 @@ class FindMedic {
         this.patientID,
         this.expired,
         this.iV,
-        this.medicalPic
+
       });
 
   FindMedic.fromJson(Map<String, dynamic> json) {
@@ -42,7 +42,7 @@ class FindMedic {
     patientID = json['patientID'];
     expired = json['expired'];
     iV = json['__v'];
-    medicalPic=json['medicalPic'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -59,7 +59,7 @@ class FindMedic {
     data['patientID'] = this.patientID;
     data['expired'] = this.expired;
     data['__v'] = this.iV;
-    data['medicalPic']=this.medicalPic;
+
     return data;
   }
 }
