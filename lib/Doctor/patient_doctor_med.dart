@@ -29,16 +29,17 @@ class Doctor_patient extends StatefulWidget {
 }
 
 class _Doctor_patientState extends State<Doctor_patient> {
- File? _imageFile;
+ File? pikedImage;
   Future<void> take()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.camera);
-    setState(() {
-      _imageFile = ImageFile as File?;
-    });
+
   }
 
   Future<void> takeG()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+    setState(() {
+      pikedImage = File(ImageFile!.path);
+    });
   }
   Future<void>d()async{
     FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -328,16 +329,6 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                                       {
                                                         "_id": "62b783753420c7f36d789ac9",
                                                         "day": "2022-07-02T00:00:00.000Z",
-                                                        "medicalPic": {
-                                                          "fieldname": "medicalPic",
-                                                          "originalname": "Screenshot 2022-04-28 112838.png",
-                                                          "encoding": "7bit",
-                                                          "mimetype": "image/png",
-                                                          "destination": "uploads/",
-                                                          "filename": _imageFile!.path,
-                                                          "path": "uploads\\medicalPic-1656467593627-840310375.png",
-                                                          "size": 57754
-                                                        },
                                                         "examination": false,
                                                         "prescription": prescription.text,
                                                         "dose": dose.text,
@@ -351,8 +342,9 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                                       },
 
                                                     ));
+                                             await   onUploadImage();
                                                 print(response.body);
-                                                print(_imageFile!.path);
+
                                                 Navigator.pop(context);
                                               }
                                               )
@@ -708,7 +700,53 @@ class _Doctor_patientState extends State<Doctor_patient> {
     print(med!.length);
     len=med!.length;
   }
+   onUploadImage() async {
+   var request = http.MultipartRequest(
+     'POST',
+     Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/"),
+   );
+   Map<String, String> headers = {"Content-type": "multipart/form-data"};
+   request.files.add(
+     http.MultipartFile(
+       'medicalPic',
+       pikedImage!.readAsBytes().asStream(),
+       pikedImage!.lengthSync(),
+       filename: pikedImage!.path.split('/').last,
+     ),
 
+   );
+   request.fields['patientID']="P29956741876655";
+   request.headers.addAll(headers);
+   print("request: " + request.toString());
+   var res = await request.send();
+   http.Response response = await http.Response.fromStream(res);
+   print(response.body);
+   print(pikedImage!.path);
+ }
+
+
+
+Future<void>upload() async{
+var stream=new http.ByteStream(pikedImage!.openRead());
+stream.cast();
+var length=await pikedImage!.length();
+var url=Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/");
+var request=new http.MultipartRequest('POST', url);
+request.fields['patientID']="P29956741876655";
+request.fields['note']="hello";
+var multiport=new http.MultipartFile("medicalPic",
+    stream,
+    length
+);
+request.files.add(multiport);
+var response=await request.send();
+print(response.stream.toString());
+if(response.statusCode==200){
+  print("uploaded");
+}else{
+  print("fail uploaded");
+}
+}
 
 
 }
