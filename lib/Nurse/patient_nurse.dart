@@ -71,21 +71,10 @@ class _Nurse_patState extends State<Nurse_pat> {
                         SizedBox(height: 3,),
                         Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
                         SizedBox(height: 3,),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
 
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
-                              SizedBox(width: 3,),
-                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
-                              SizedBox(width: 3,),
-                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
-                              SizedBox(width: 3,),
-                            ],
-                          ),
-                        )
+                        med![index].medicalPic ==null?Text("null") :
+                        Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),fit: BoxFit.fill,) ,
+
 
                       ],
                     ),
@@ -526,11 +515,12 @@ class _Nurse_patState extends State<Nurse_pat> {
 
 
   }
-  Future<void>getallmed()async {
+  Future<dynamic> getallmed()async {
     List?list1 = await r.getAll("https://stark-lake-52973.herokuapp.com/medicalrecord/"+pid.toString());
     med!.addAll(list1!.map((e) => FindMedic.fromJson(e)).toList());
 
     print(med!.length);
+    print(pid.toString());
     len=med!.length;
   }
 

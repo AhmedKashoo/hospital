@@ -72,21 +72,9 @@ int ? len;
                         SizedBox(height: 3,),
                         Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
                         SizedBox(height: 3,),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
+                        med![index].medicalPic ==null?Text("null") :
+                        Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),fit: BoxFit.fill,) ,
 
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
-                              SizedBox(width: 3,),
-                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
-                              SizedBox(width: 3,),
-                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
-                              SizedBox(width: 3,),
-                            ],
-                          ),
-                        )
 
                       ],
                     ),
@@ -530,7 +518,7 @@ get allmed{
 
 
   }
-Future<void>getallmed()async {
+Future<dynamic>getallmed()async {
   List?list1 = await r.getAll("https://stark-lake-52973.herokuapp.com/medicalrecord/"+id.toString());
   med!.addAll(list1!.map((e) => FindMedic.fromJson(e)).toList());
 

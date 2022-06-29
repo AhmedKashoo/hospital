@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,9 +29,14 @@ class Doctor_patient extends StatefulWidget {
 }
 
 class _Doctor_patientState extends State<Doctor_patient> {
+ File? _imageFile;
   Future<void> take()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.camera);
+    setState(() {
+      _imageFile = ImageFile as File?;
+    });
   }
+
   Future<void> takeG()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.gallery);
   }
@@ -96,21 +102,9 @@ class _Doctor_patientState extends State<Doctor_patient> {
                         SizedBox(height: 3,),
                         Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
                         SizedBox(height: 3,),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
+                        med![index].medicalPic ==null?Text("null") :
+                        Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),fit: BoxFit.fill,) ,
 
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
-                              SizedBox(width: 3,),
-                              Image.asset("image/xray.jpg",width: 30,height: 30,) ,
-                              SizedBox(width: 3,),
-                              Image.asset("image/xray.jpg",width: 40,height: 40,) ,
-                              SizedBox(width: 3,),
-                            ],
-                          ),
-                        )
 
                       ],
                     ),
@@ -334,6 +328,16 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                                       {
                                                         "_id": "62b783753420c7f36d789ac9",
                                                         "day": "2022-07-02T00:00:00.000Z",
+                                                        "medicalPic": {
+                                                          "fieldname": "medicalPic",
+                                                          "originalname": "Screenshot 2022-04-28 112838.png",
+                                                          "encoding": "7bit",
+                                                          "mimetype": "image/png",
+                                                          "destination": "uploads/",
+                                                          "filename": _imageFile!.path,
+                                                          "path": "uploads\\medicalPic-1656467593627-840310375.png",
+                                                          "size": 57754
+                                                        },
                                                         "examination": false,
                                                         "prescription": prescription.text,
                                                         "dose": dose.text,
@@ -348,6 +352,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
 
                                                     ));
                                                 print(response.body);
+                                                print(_imageFile!.path);
                                                 Navigator.pop(context);
                                               }
                                               )
@@ -696,7 +701,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
 
 
   }
-  Future<void>getallmed()async {
+  Future<dynamic>getallmed()async {
     List?list1 = await r.getAll("https://stark-lake-52973.herokuapp.com/medicalrecord/"+pid.toString());
     med!.addAll(list1!.map((e) => FindMedic.fromJson(e)).toList());
 
