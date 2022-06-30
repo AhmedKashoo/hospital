@@ -21,9 +21,6 @@ import 'package:http/http.dart'as http;
 
 class Doctor_patient extends StatefulWidget {
 
-
-
-
   @override
   State<Doctor_patient> createState() => _Doctor_patientState();
 }
@@ -32,6 +29,9 @@ class _Doctor_patientState extends State<Doctor_patient> {
  File? pikedImage;
   Future<void> take()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.camera);
+    setState(() {
+      pikedImage = File(ImageFile!.path);
+    });
 
   }
 
@@ -74,7 +74,6 @@ class _Doctor_patientState extends State<Doctor_patient> {
       details = 0;
       return FixedTimeline.tileBuilder(
         mainAxisSize: MainAxisSize.max,
-
         builder: TimelineTileBuilder.connectedFromStyle(
           firstConnectorStyle: ConnectorStyle.solidLine,
           contentsAlign: ContentsAlign.alternating,
@@ -86,16 +85,11 @@ class _Doctor_patientState extends State<Doctor_patient> {
             padding: const EdgeInsets.all(8.0),
             child: Center(
               child: Card(
-
-
-
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-
-
                       children: [
                         Text(med![index].note.toString(),style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
                         SizedBox(height: 3,),
@@ -105,8 +99,6 @@ class _Doctor_patientState extends State<Doctor_patient> {
                         SizedBox(height: 3,),
                         med![index].medicalPic ==null?Text("null") :
                         Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),fit: BoxFit.fill,) ,
-
-
                       ],
                     ),
                   ),
@@ -324,26 +316,9 @@ class _Doctor_patientState extends State<Doctor_patient> {
                                               text: 'Apply',
                                               color: Colors.blue.shade800,
                                               function: ()async {
-                                                http.Response response=await http.post(Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/"),headers: {"Content-type": "application/json"},
-                                                    body: jsonEncode(
-                                                      {
-                                                        "_id": "62b783753420c7f36d789ac9",
-                                                        "day": "2022-07-02T00:00:00.000Z",
-                                                        "examination": false,
-                                                        "prescription": prescription.text,
-                                                        "dose": dose.text,
-                                                        "period": period.text,
-                                                        "nextAppointment": datecontroll.text,
-                                                        "note": notecontroll.text,
-                                                        "doctorID": id.toString(),
-                                                        "patientID": pid.toString(),
-                                                        "expired": false,
-                                                        "__v": 0
-                                                      },
 
-                                                    ));
                                              await   onUploadImage();
-                                                print(response.body);
+
 
                                                 Navigator.pop(context);
                                               }
@@ -700,6 +675,8 @@ class _Doctor_patientState extends State<Doctor_patient> {
     print(med!.length);
     len=med!.length;
   }
+
+
    onUploadImage() async {
    var request = http.MultipartRequest(
      'POST',
@@ -715,7 +692,14 @@ class _Doctor_patientState extends State<Doctor_patient> {
      ),
 
    );
-   request.fields['patientID']="P29956741876655";
+   request.fields["_id"]= "62b783753420c7f36d789ac9";
+   request.fields[  "prescription"]= prescription.text;
+   request.fields["dose"] =dose.text;
+   request.fields["period"]= period.text;
+   request.fields[  "nextAppointment"]= datecontroll.text;
+   request.fields["note"]= notecontroll.text;
+   request.fields["doctorID"]= id.toString();
+   request.fields ["patientID"]= pid.toString();
    request.headers.addAll(headers);
    print("request: " + request.toString());
    var res = await request.send();
@@ -726,7 +710,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
 
 
 
-Future<void>upload() async{
+/*Future<void>upload() async{
 var stream=new http.ByteStream(pikedImage!.openRead());
 stream.cast();
 var length=await pikedImage!.length();
@@ -747,6 +731,6 @@ if(response.statusCode==200){
   print("fail uploaded");
 }
 }
-
+*/
 
 }
