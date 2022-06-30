@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
 import 'package:hospital/Network/dio/repo.dart';
 import 'package:hospital/Network/dio/web.dart';
 import 'package:hospital/components/components.dart';
@@ -98,7 +99,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                         Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
                         SizedBox(height: 3,),
                         med![index].medicalPic ==null?Text("null") :
-                        Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),fit: BoxFit.fill,) ,
+                        FullScreenWidget(child: Container(child: Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),))) ,
                       ],
                     ),
                   ),
