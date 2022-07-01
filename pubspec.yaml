@@ -77,6 +77,7 @@ flutter:
     - image/blood.png
     - image/xray.jpg
     - image/4003790.png
+    - image/backChat.jpg
 
 
         # An image asset can refer to one or more resolution-specific "variants", see

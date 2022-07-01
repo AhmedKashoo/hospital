@@ -74,7 +74,7 @@ int ? len;
                         Text("Documents",style: TextStyle(color: Colors.cyanAccent.shade400,fontWeight: FontWeight.bold,fontSize: 18),),
                         SizedBox(height: 3,),
                         med![index].medicalPic ==null?Text("null") :
-                        FullScreenWidget(child: Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),height: 50,width: 50,)) ,
+                        FullScreenWidget(child: Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),height: 60,width: 60,)) ,
 
 
                       ],

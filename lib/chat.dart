@@ -28,6 +28,7 @@ class _Hospital_ChatState extends State<Hospital_Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: Colors.blue.shade800,
 
       body: FutureBuilder(

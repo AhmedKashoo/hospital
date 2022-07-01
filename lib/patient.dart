@@ -81,9 +81,9 @@ class _patientState extends State<patient> {
                                 child: DataTable(headingRowColor:
                                 MaterialStateColor.resolveWith((states) => Colors.blue.shade800),
                                     columns: [
-                                  DataColumn(label: Text('Name')),
-                                  DataColumn(label: Text('password')),
-                                  DataColumn(label: Text('Id')),
+                                  DataColumn(label: Text('Name',style: TextStyle(color: Colors.white),)),
+                                  DataColumn(label: Text('password',style: TextStyle(color: Colors.white),)),
+                                  DataColumn(label: Text('Id',style: TextStyle(color: Colors.white),)),
                                 ], rows: pat!.map((e) => DataRow(
                                     selected: true,
                                     onSelectChanged: (value) {},

@@ -32,6 +32,10 @@ class _Chatting2State extends State<Chatting2> {
         builder:(context,dynamic){
           return Scaffold(
             appBar: AppBar(
+              title: Padding(
+                padding: const EdgeInsets.only(right: 50.0),
+                child: Center(child: Text("Chat",style:TextStyle(color: Colors.white) ,)),
+              ),
               backgroundColor:  Colors.blue.shade800,
               elevation: 0,
             ),

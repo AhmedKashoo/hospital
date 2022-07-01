@@ -295,7 +295,6 @@ String?blodtype;
 
     );
     request.fields["note"]= notecontroll.text;
-    request.fields["doctorID"]= id.toString();
     request.fields ["patientID"]= pid.toString();
     request.headers.addAll(headers);
     print("request: " + request.toString());
