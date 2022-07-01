@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hospital/Network/dio/repo.dart';
 import 'package:hospital/Network/dio/web.dart';
 import 'package:hospital/components/my_flutter_app_icons.dart';
-import 'package:hospital/patient/chat2_patient.dart';
+import 'package:hospital/patient/chat4.dart';
 import 'package:hospital/patient/chat_patient.dart';
 import 'package:hospital/patient/patient%20med.dart';
 
@@ -225,7 +225,7 @@ class _Patient_homeState extends State<Patient_home> {
             ),
             SizedBox(height: 25,),
             GestureDetector(
-              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatting2_patient()));},
+              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Chat4()));},
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),

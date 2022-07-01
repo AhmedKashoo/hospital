@@ -29,8 +29,8 @@ class _HospitalHomeState extends State<HospitalHome> {
           circleColor: Colors.blue.shade900,
           tabs: [
             TabData(iconData: Icons.home, title: "Home"),
-            TabData(iconData: Icons.search, title: "Search"),
-            TabData(iconData: Icons.shopping_cart, title: "Basket")
+            TabData(iconData: Icons.chat, title: "Search"),
+
           ],
           onTabChangedListener: (position) {
             setState(() {

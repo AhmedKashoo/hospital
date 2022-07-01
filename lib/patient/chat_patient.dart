@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hospital/chat2.dart';
 import 'package:hospital/components/components.dart';
-import 'package:hospital/patient/chat2_patient.dart';
+import 'package:hospital/patient/chat4.dart';
 
 
 class Patient_Chat extends StatefulWidget {
@@ -103,7 +103,7 @@ class _Patient_ChatState extends State<Patient_Chat> {
                       child: Container(
                         child: ListView.separated(
                           itemBuilder:(context,index)=>chatting(
-                            ontap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatting2_patient()));}
+                            ontap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Chat4()));}
                           )
                           , separatorBuilder: (context,index)=>SizedBox(height: 25,)
                           , itemCount:10 ,scrollDirection: Axis.vertical,),

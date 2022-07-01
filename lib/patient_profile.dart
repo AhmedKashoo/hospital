@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,12 +23,19 @@ class patient_profile extends StatefulWidget {
 }
 
 class _patient_profileState extends State<patient_profile> {
+  File? pikedImage;
 
   Future<void> take()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.camera);
+    setState(() {
+      pikedImage = File(ImageFile!.path);
+    });
   }
   Future<void> takeG()async{
     final ImageFile =await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+    setState(() {
+      pikedImage = File(ImageFile!.path);
+    });
   }
   Future<void>d()async{
     FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -226,25 +234,8 @@ String?blodtype;
                                               text: 'Apply',
                                               color: Colors.blue.shade800,
                                               function: ()async {
-                                                http.Response response=await http.post(Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/"),headers: {"Content-type": "application/json"},
-                                                    body: jsonEncode(
-                                                      {
-                                                        "_id": "62b783753420c7f36d789ac9",
-                                                        "day": "2022-07-02T00:00:00.000Z",
-                                                        "examination": false,
-                                                        "prescription": "pandolExtra",
-                                                        "dose": 2,
-                                                        "period": "breakfast,dinner",
-                                                        "nextAppointment": "2022-07-06T00:00:00.000Z",
-                                                        "note": notecontroll.text,
-                                                        "doctorID": "d33956741876655",
-                                                        "patientID": pid.toString(),
-                                                        "expired": false,
-                                                        "__v": 0
-                                                      },
 
-                                                    ));
-                                                print(response.body);
+                                                await onUploadImage();
                                                 Navigator.pop(context);
                                               })
                                         ],
@@ -287,6 +278,31 @@ String?blodtype;
     }
 
 
+  }
+  onUploadImage() async {
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse("https://stark-lake-52973.herokuapp.com/medicalrecord/"),
+    );
+    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+    request.files.add(
+      http.MultipartFile(
+        'medicalPic',
+        pikedImage!.readAsBytes().asStream(),
+        pikedImage!.lengthSync(),
+        filename: pikedImage!.path.split('/').last,
+      ),
+
+    );
+    request.fields["note"]= notecontroll.text;
+    request.fields["doctorID"]= id.toString();
+    request.fields ["patientID"]= pid.toString();
+    request.headers.addAll(headers);
+    print("request: " + request.toString());
+    var res = await request.send();
+    http.Response response = await http.Response.fromStream(res);
+    print(response.body);
+    print(pikedImage!.path);
   }
 
   }

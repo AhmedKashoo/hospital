@@ -1,19 +1,21 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/components/components.dart';
 
-import 'constant.dart';
-import 'messagemodel.dart';
+import '../constant.dart';
+import '../messagemodel.dart';
 
-class Chatting2 extends StatefulWidget {
-  const Chatting2({Key? key}) : super(key: key);
+class Chatting3 extends StatefulWidget {
+  const Chatting3({Key? key}) : super(key: key);
 
   @override
-  State<Chatting2> createState() => _Chatting2State();
+  State<Chatting3> createState() => _Chatting3State();
 }
 
-class _Chatting2State extends State<Chatting2> {
+class _Chatting3State extends State<Chatting3> {
   List<MessageModel> mess = [];
   var chat = TextEditingController();
   String?message;
@@ -22,13 +24,13 @@ class _Chatting2State extends State<Chatting2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getMessages(receiverId: recid.toString());
+    getMessages(receiverId: pid.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getMessages(receiverId: recid.toString()),
+      future: getMessages(receiverId: pid.toString()),
         builder:(context,dynamic){
           return Scaffold(
             appBar: AppBar(
@@ -36,90 +38,84 @@ class _Chatting2State extends State<Chatting2> {
               elevation: 0,
             ),
             backgroundColor: Colors.white,
-            body: ConditionalBuilder(
-              condition: mess.length > 0,
-              builder: (context) => Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ListView.separated(
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index)
-                        {
-                          var message = mess[index];
+            body:  Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index)
+                      {
+                        var message = mess[index];
 
-                          if(id == message.senderid)
-                            return buildMyMessage(message);
+                        if(id == message.senderid)
+                          return buildMyMessage(message);
 
-                          return buildMessage(message);
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                          height: 15.0,
-                        ),
-                        itemCount: mess.length,
+                        return buildMessage(message);
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 15.0,
+                      ),
+                      itemCount: mess.length,
 
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        15.0,
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          15.0,
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0,
-                              ),
-                              child: TextFormField(
-                                controller: chat,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'type your message here ...',
-                                ),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0,
+                            ),
+                            child: TextFormField(
+                              controller: chat,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'type your message here ...',
                               ),
                             ),
                           ),
-                          Container(
-                            height: 50.0,
-                            color: Colors.blue,
-                            child: MaterialButton(
-                              onPressed: () {
-                               setState(() {
-                                 sendMessage(
-                                   recid: recid.toString(),
-                                   date: Timestamp.now(),
-                                   text: chat.text,
-                                 );
-                                 chat.clear();
-                                 FocusScope.of(context).unfocus();
-                               });
+                        ),
+                        Container(
+                          height: 50.0,
+                          color: Colors.blue,
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                sendMessage(
+                                  recid: pid.toString(),
+                                  date: Timestamp.now(),
+                                  text: chat.text,
+                                );
+                                chat.clear();
+                                FocusScope.of(context).unfocus();
+                              });
 
-                              },
-                              minWidth: 1.0,
-                              child: Icon(
-                                Icons.send,
-                                size: 16.0,
-                                color: Colors.white,
-                              ),
+                            },
+                            minWidth: 1.0,
+                            child: Icon(
+                              Icons.send,
+                              size: 16.0,
+                              color: Colors.white,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              fallback: (context) => Center(
-                child: CircularProgressIndicator(),
+                  ),
+                ],
               ),
             ),
           );

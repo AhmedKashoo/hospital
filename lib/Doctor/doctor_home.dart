@@ -10,8 +10,10 @@ import 'package:hospital/Network/dio/web.dart';
 import 'package:hospital/patient/pModel.dart';
 
 import '../DShuadle.dart';
+import '../chat2.dart';
 import '../constant.dart';
 import '../login.dart';
+import 'chat3.dart';
 
 class Doc_home extends StatefulWidget {
   const Doc_home({Key? key}) : super(key: key);
@@ -118,12 +120,10 @@ String?k;
                                       color: Colors.blueAccent
                                   ),),
 
-                                  Text('${now.hour}:${now.minute}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.blueAccent
-                                    ),),
+                                  GestureDetector(child: Icon(Icons.chat,color: Colors.blue,),onTap: (){
+                                    pid=doc1![index].patientID.toString();
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatting3()));
+                                  },)
                                 ],
                               ),
                             ),
