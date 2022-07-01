@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "311792076851",
+    "project_id": "hospitalchat-2893f",
+    "storage_bucket": "hospitalchat-2893f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311792076851:android:3f8b0dbbea8db112b9fb46",
+        "android_client_info": {
+          "package_name": "com.example.hospital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311792076851-h5keo1bhupsgagpfo610ue15c9arnd2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hospital",
+            "certificate_hash": "2f18a7d9f3008d24d3366c87d93836609af78df2"
+          }
+        },
+        {
+          "client_id": "311792076851-7irar4phudf8itbqq4s9l7m6ecvavcq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT55MNdC0djrKfLWO0gIS35a7tOu-zM5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311792076851-7irar4phudf8itbqq4s9l7m6ecvavcq3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

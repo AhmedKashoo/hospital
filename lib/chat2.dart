@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/components/components.dart';
+
+import 'constant.dart';
+import 'messagemodel.dart';
 
 class Chatting2 extends StatefulWidget {
   const Chatting2({Key? key}) : super(key: key);
@@ -10,64 +15,230 @@ class Chatting2 extends StatefulWidget {
 
 class _Chatting2State extends State<Chatting2> {
   var chat = TextEditingController();
+  String?message;
   Color c = const Color.fromARGB(232,234,245,245);
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getMessages(receiverId: recid.toString());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor:  Colors.blue.shade800,
-        elevation: 0,
-      ),
-      backgroundColor: Colors.blue.shade800,
-      body: Stack(
-        children: [
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 45,left: 30),
-              child: Text('Chat',style: TextStyle(
-                  color: Colors.white,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 45,
-                  fontWeight: FontWeight.bold
+    return FutureBuilder(
+      future: getMessages(receiverId: recid.toString()),
+        builder:(context,dynamic){
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor:  Colors.blue.shade800,
+              elevation: 0,
+            ),
+            backgroundColor: Colors.white,
+            body: ConditionalBuilder(
+              condition: mess.length > 0,
+              builder: (context) => Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index)
+                        {
+                          var message = mess[index];
+
+                          if(id == message.senderid)
+                            return buildMyMessage(message);
+
+                          return buildMessage(message);
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: 15.0,
+                        ),
+                        itemCount: mess.length,
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          15.0,
+                        ),
+                      ),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                              ),
+                              child: TextFormField(
+                                controller: chat,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'type your message here ...',
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 50.0,
+                            color: Colors.blue,
+                            child: MaterialButton(
+                              onPressed: () {
+                               setState(() {
+                                 sendMessage(
+                                   recid: recid.toString(),
+                                   date: Timestamp.now(),
+                                   text: chat.text,
+                                 );
+                               });
+                              },
+                              minWidth: 1.0,
+                              child: Icon(
+                                Icons.send,
+                                size: 16.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              fallback: (context) => Center(
+                child: CircularProgressIndicator(),
               ),
             ),
+          );
+        }
+    );
+
+
+  }
+  void sendMessage({
+    required String recid,
+    required Timestamp date,
+    required String text,
+  }) {
+    MessageModel model = MessageModel(
+      text: text,
+      senderid: id,
+      reciverid: recid,
+      date: date,
+    );
+
+    // set my chats
+
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(id)
+        .collection('chat')
+        .doc(recid)
+        .collection('message')
+        .add(model.toMap())
+        .then((value) {
+
+    }).catchError((error) {
+      print(error);
+    });
+
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(recid)
+        .collection('chat')
+        .doc(id)
+        .collection('message')
+        .add(model.toMap())
+        .then((value) {
+    }).catchError((error) {
+      print(error);
+
+    });
+  }
+  List<MessageModel> mess = [];
+
+  Future<void> getMessages({
+    required String receiverId,
+  }) async {
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(id)
+        .collection('chat')
+        .doc(receiverId)
+        .collection('message')
+        .orderBy('date')
+        .snapshots()
+        .listen((event) {
+      mess = [];
+
+      event.docs.forEach((element) {
+        mess.add(MessageModel.fromJson(element.data()));
+      });
+
+
+    });
+  }
+  Widget buildMessage(MessageModel model) => Align(
+    alignment: AlignmentDirectional.centerStart,
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadiusDirectional.only(
+          bottomEnd: Radius.circular(
+            10.0,
           ),
-      Padding(
-        padding: const EdgeInsets.only(top: 100.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius:BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
-            color: Colors.white,
+          topStart: Radius.circular(
+            10.0,
           ),
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: form(
-                    controlled_text: chat,
-                    text: 'Type Your Message',
-                    input_type: TextInputType.text,
-                  bordercercuilar: 30,
-                  visible_function: (){
-                      chat.clear();
-                  },
-                  suffix_icon: Icons.send,
-                  suffix_color: Colors.blue,
-                  border_colors: Colors.transparent
-                ),
-              )
-            ],
+          topEnd: Radius.circular(
+            10.0,
           ),
         ),
-      )
-        ],
       ),
-    );
-  }
+      padding: EdgeInsets.symmetric(
+        vertical: 5.0,
+        horizontal: 10.0,
+      ),
+      child: Text(
+        model.text.toString(),
+      ),
+    ),
+  );
+
+  Widget buildMyMessage(MessageModel model) => Align(
+    alignment: AlignmentDirectional.centerEnd,
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.blue.withOpacity(
+          .2,
+        ),
+        borderRadius: BorderRadiusDirectional.only(
+          bottomStart: Radius.circular(
+            10.0,
+          ),
+          topStart: Radius.circular(
+            10.0,
+          ),
+          topEnd: Radius.circular(
+            10.0,
+          ),
+        ),
+      ),
+      padding: EdgeInsets.symmetric(
+        vertical: 5.0,
+        horizontal: 10.0,
+      ),
+      child: Text(
+        model.text.toString(),
+      ),
+    ),
+  );
 }
