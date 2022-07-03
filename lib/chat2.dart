@@ -27,9 +27,11 @@ class _Chatting2State extends State<Chatting2> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getMessages(receiverId: recid.toString()),
-        builder:(context,dynamic){
+    return StreamBuilder(
+        stream:FirebaseFirestore.instance.collection('user').doc(id).collection('chat').doc(recid).collection('message')
+            .orderBy('date')
+            .snapshots(),
+        builder:(context,snapsho){
           return Scaffold(
             appBar: AppBar(
               title: Padding(
@@ -97,15 +99,15 @@ class _Chatting2State extends State<Chatting2> {
                             color: Colors.blue,
                             child: MaterialButton(
                               onPressed: () {
-                               setState(() {
-                                 sendMessage(
-                                   recid: recid.toString(),
-                                   date: Timestamp.now(),
-                                   text: chat.text,
-                                 );
-                                 chat.clear();
-                                 FocusScope.of(context).unfocus();
-                               });
+                                setState(() {
+                                  sendMessage(
+                                    recid: recid.toString(),
+                                    date: Timestamp.now(),
+                                    text: chat.text,
+                                  );
+                                  chat.clear();
+                                  FocusScope.of(context).unfocus();
+                                });
 
                               },
                               minWidth: 1.0,

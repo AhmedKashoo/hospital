@@ -694,7 +694,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
      ),
 
    );
-   request.fields["_id"]= "62b783753420c7f36d789ac9";
+  // request.fields["_id"]= "62b783753420c7f36d789ac9";
    request.fields[  "prescription"]= prescription.text;
    request.fields["dose"] =dose.text;
    request.fields["period"]= period.text;
