@@ -25,6 +25,7 @@ class _Chat4State extends State<Chat4> {
   @override
   void initState() {
     // TODO: implement initState
+    getallmed();
     super.initState();
     getMessages(receiverId: recid.toString());
   }
