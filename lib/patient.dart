@@ -363,6 +363,7 @@ class _patientState extends State<patient> {
     );
   }
   List<plog>?pat=[];
+
   late repo r=api();
   get all{
     return pat;
@@ -371,9 +372,11 @@ class _patientState extends State<patient> {
   Future<void>getallpat2()async {
     List?list1 = await r.getAll(patient_url);
     pat!.addAll(list1!.map((e) => plog.fromJson(e)).toList());
+
     print(pat);
 
   }
+
 
 }
 

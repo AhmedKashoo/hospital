@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital/MedicalRecord.dart';
+import 'package:hospital/donation.dart';
 import 'package:hospital/nurse.dart';
 import 'package:hospital/patient.dart';
 
@@ -236,62 +237,67 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>donation()));
+                },
+                child: Container(
 
-                height: 80,
+                  height: 80,
 
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue.shade900),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue.shade900),
 
-                    borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15),
 
-                    color: Colors.white
+                      color: Colors.white
 
-                ),
+                  ),
 
-                child:   Row(
+                  child:   Row(
 
-                  children: [
+                    children: [
 
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child:
-                      Image(image: AssetImage('image/blood.png',),height: 40,width: 40,),
+                      Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child:
+                        Image(image: AssetImage('image/blood.png',),height: 40,width: 40,),
 
-                    ),
+                      ),
 
-                    SizedBox(width: 8,),
+                      SizedBox(width: 8,),
 
-                    Expanded(
+                      Expanded(
 
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 22 ),
-                        child: Column(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 22 ),
+                          child: Column(
 
-                          crossAxisAlignment:CrossAxisAlignment.start ,
-                          mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment:CrossAxisAlignment.start ,
+                            mainAxisAlignment: MainAxisAlignment.end,
 
-                          children: [
+                            children: [
 
-                            Text('Blood Donation',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.blue.shade900)
-                              ,maxLines: 1,overflow: TextOverflow.ellipsis,),
-                            Text('250',style: TextStyle(fontWeight: FontWeight.w500,color: Colors.blue.shade900,fontSize: 15)),
+                              Text('Blood Donation',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.blue.shade900)
+                                ,maxLines: 1,overflow: TextOverflow.ellipsis,),
+                              Text('250',style: TextStyle(fontWeight: FontWeight.w500,color: Colors.blue.shade900,fontSize: 15)),
 
 
 
-                          ],
+                            ],
 
+                          ),
                         ),
+
+
                       ),
 
 
-                    ),
+                    ],
 
-
-                  ],
+                  ),
 
                 ),
-
               ),
             )
 

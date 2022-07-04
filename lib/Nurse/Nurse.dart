@@ -4,6 +4,7 @@ import 'package:hospital/Doctor/patient_doctor_med.dart';
 import 'package:hospital/Network/dio/repo.dart';
 import 'package:hospital/Network/dio/web.dart';
 import 'package:hospital/Nurse/patient_nurse.dart';
+import 'package:hospital/Nurse/shunur.dart';
 
 import '../DShuadle.dart';
 import '../NurseModel.dart';
@@ -26,6 +27,7 @@ class _NurseState extends State<Nurse> {
     super.initState();
     getallnur1() ;
     getalldoc2();
+    getalldoc3();
   }
   @override
   Widget build(BuildContext context) {
@@ -35,8 +37,45 @@ class _NurseState extends State<Nurse> {
         builder: (context,dynamic)=>Scaffold(
           appBar: AppBar(
             leading: GestureDetector(
-                onTap: (){},
-                child: Icon(Icons.local_hospital,color: Colors.blueAccent,size: 30,)),
+                onTap: () {
+                  Dialog  errorDialog=Dialog(
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          side: BorderSide(color: Colors.blue,width: 2)
+                      ),
+                      child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            height: 120.0,
+                            width: 700.0,
+                            child: ListView.separated(
+                                itemBuilder: (context,index){
+                                  return Column(
+                                    children: [
+                                      Text("your Work Shedule is :",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 18),),
+                                      SizedBox(height: 3,),
+                                      Text("your Work  from : "+Shunur![index].from.toString(),style: TextStyle(fontWeight:FontWeight.bold)),
+                                      SizedBox(height: 3,),
+                                      Text("your Work  to : "+Shunur![index].to.toString(),style: TextStyle(fontWeight:FontWeight.bold)),
+                                      SizedBox(height: 3,),
+                                      Text("your Work  day is : ",style: TextStyle(fontWeight:FontWeight.bold)),
+                                      SizedBox(height: 3,),
+                                      Text(Shunur![index].day.toString(),style: TextStyle(fontWeight:FontWeight.bold))
+                                    ],
+                                  );
+                                },
+                                separatorBuilder:(context,index){return SizedBox(height: 10);},
+                                itemCount: Shunur!.length
+                            ),
+                          )
+                      )
+
+                  );
+                  showDialog(context: context, builder: (BuildContext context) => errorDialog);
+                },
+                child: Icon(Icons.document_scanner, color: Colors.blueAccent,
+                  size: 30,)),
             title: Center(child: Text("Home",
               style: TextStyle(color: Colors.blueAccent,fontSize: 25,fontWeight: FontWeight.bold
               ),)),
@@ -136,10 +175,15 @@ class _NurseState extends State<Nurse> {
 
   }
   List<Nlog>?nur=[];
+  List<shuNur>?Shunur=[];
   List<NShu>?nur1 = [];
   late repo r=api();
   get all{
     return nur;
+
+  }
+  get all2{
+    return Shunur;
 
   }
   get alln{
@@ -168,6 +212,16 @@ class _NurseState extends State<Nurse> {
       patient_id!.add(nur1![i].patientID.toString());
       print(nur1![i].patientID.toString());
     }
+  }
+
+  Future<void> getalldoc3() async {
+    List?list4 = await r.getAll(
+        'https://stark-lake-52973.herokuapp.com/nurseschedule/'+id.toString());
+    Shunur!.addAll(list4!.map((e) => shuNur.fromJson(e)).toList());
+    print(Shunur![0].from);
+
+
+
   }
 }
 

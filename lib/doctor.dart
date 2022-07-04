@@ -29,6 +29,9 @@ var docid;
   var datecontroll = TextEditingController();
   var patientdatecontroll = TextEditingController();
   var hourscontroll = TextEditingController();
+  DateTime? date;
+var fromcontroll = TextEditingController();
+var tocontroll = TextEditingController();
   var numpatientscontroll = TextEditingController();
   var searchcontroll = TextEditingController();
   var pass = TextEditingController();
@@ -87,7 +90,7 @@ var docid;
                         DataColumn(label: Text('Specialization',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                         DataColumn(label: Text('Doctor Schedule',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
 
-                      ], rows: doc2!.map((e) => DataRow(
+                      ], rows: m.map((e) => DataRow(
                           selected: false,
                           onSelectChanged: (value) {
 
@@ -144,10 +147,19 @@ var docid;
                                                   ),
                                                   ),
                                                   SizedBox(height: 10,),
+
                                                   form(
                                                       bordercercuilar: 15.0,
-                                                      controlled_text:hourscontroll
-                                                      , text: 'Work hours',
+                                                      controlled_text:fromcontroll
+                                                      , text: 'from',
+                                                      input_type: TextInputType.number,
+                                                      prefix_icon: Icons.lock_clock
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  form(
+                                                      bordercercuilar: 15.0,
+                                                      controlled_text:tocontroll
+                                                      , text: 'to',
                                                       input_type: TextInputType.number,
                                                       prefix_icon: Icons.lock_clock
                                                   ),
@@ -184,22 +196,43 @@ var docid;
                                                         prefix_icon: Icons.person_add
                                                     ),
                                                   ),
-                                                  SizedBox(height: 20,),
+                                                  SizedBox(height: 10),
+                                                  form(
+                                                      bordercercuilar: 15.0,
+                                                      controlled_text:hourscontroll
+                                                      , text: 'Add Note',
+                                                      input_type: TextInputType.text,
+                                                      prefix_icon: Icons.note
+                                                  ),
+                                                  SizedBox(height: 20),
                                                   Padding(padding: EdgeInsets.only(top: 10.0)),
                                                   TextButton(onPressed: ()async {
+
 
 
     http.Response response=await http.post(Uri.parse(Shu_url),headers: {"Content-type": "application/json"},
                                                         body: jsonEncode(
                                                          {
 
-                                                           "note": "ba7r",
+                                                           "note": hourscontroll.text,
                                                            "doctorID":docid.toString(),
                                                            "patientID": searchcontroll.text
                                                          }
 
                                                         ));
+    http.Response response2=await http.post(Uri.parse("https://stark-lake-52973.herokuapp.com/doctorschedule"),headers: {"Content-type": "application/json"},
+        body: jsonEncode(
+            {
+              "day": patientdatecontroll.text,
+              "doctorID":docid.toString(),
+              "from": fromcontroll.text,
+              "to": tocontroll.text
+
+            }
+
+        ));
                                                     print(response.body);
+    print(response2.body);
 
                                                     Navigator.of(context).pop();
                                                   },
@@ -422,10 +455,21 @@ var docid;
     return doc2;
 
   }
+  List<Dlog>m=[];
   Future<void>getalldoc1()async {
-    List?list3 = await r.getAll(Shu_url);
+     List?list3= await r.getAll(Doctor_url);
     doc2!.addAll(list3!.map((e) => Dlog.fromJson(e)).toList());
+     for (int i = 0; i < doc2!.length; i++) {
+       if (doc2![i].hospitalID == id) {
+
+         m.add(doc2![i]);
+       }
+
+     }
+
     print(doc2);
   }
+  int ?index;
+
 
 }
