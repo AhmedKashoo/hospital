@@ -100,7 +100,7 @@ class _Doctor_patientState extends State<Doctor_patient> {
                         SizedBox(height: 3,),
                         med![index].medicalPic ==null?Text("null") :
                         FullScreenWidget(child: Container(height: 50,width: 50,
-                            child: Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),))) ,
+                            child: Image.network(med![index].medicalPic!.path.toString(),))) ,
                       ],
                     ),
                   ),

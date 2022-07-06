@@ -73,7 +73,7 @@ class _Nurse_patState extends State<Nurse_pat> {
                         SizedBox(height: 3,),
 
                         med![index].medicalPic ==null?Text("null") :
-                        Image.network("https://stark-lake-52973.herokuapp.com/photo/"+med![index].medicalPic!.filename.toString(),fit: BoxFit.fill,) ,
+                        Image.network(med![index].medicalPic!.path.toString(),fit: BoxFit.fill,) ,
 
 
                       ],
